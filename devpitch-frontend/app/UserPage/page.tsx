@@ -1,9 +1,15 @@
-import Navbar from "./components/Navbar"
-import {EyeIcon} from 'lucide-react';
+"use client";
+import React from 'react';
 import Image from 'next/image';
-export default async function Home() {
-  
-  const dummyPosts = [
+import { EyeIcon } from 'lucide-react';
+const dummyUser = {
+  id: '101',
+  name: 'John Doe',
+  username: 'johndoe',
+  bio: 'A passionate entrepreneur building the future.',
+  image: 'https://via.placeholder.com/220',
+};
+const dummyPosts = [
     {
       _id: '1',
       title: 'AI-Powered Code Reviewer',
@@ -35,22 +41,17 @@ export default async function Home() {
       image: 'https://via.placeholder.com/300x200',
     }
   ];
-  
-  return ( 
-    <>
-    {/* Hero Section */}
-          <section className='flex flex-col items-center justify-center min-h-[430px] bg-gray-100 text-center'>
-            <h1 className='text-4xl font-bold'>Welcome to DevPitch</h1>
-            <p className='text-lg'>A platform for developers to pitch their ideas</p>
-            <button className='bg-blue-500 text-white px-4 py-2 rounded-md mt-4'>Get Started</button>
-          </section>
-          {/* Search Bar */}
-          <section className='flex justify-center items-center h-32 bg-gray-200 gap-4'>
-            <input type="text" placeholder="Search for projects" className='px-4 py-2 rounded-md w-[50%]' />
-            <button className='bg-blue-500 text-white px-4 py-2 rounded-md'>Search</button>
-          </section>
-          {/* Cards Section */}
-          <section className='container mx-auto px-4 py-8'>
+
+function UserPage() {
+  return (
+    <section className='profile_container flex flex-col items-center gap-10 p-5'>
+      <div className='profile_card bg-white shadow-lg rounded-lg p-6 w-full lg:w-1/3 text-center'>
+        <Image src={dummyUser.image} alt={dummyUser.name} width={220} height={220} className='rounded-full mx-auto' />
+        <h3 className='text-2xl font-bold mt-4'>{dummyUser.name}</h3>
+        <p className='text-lg text-gray-600'>@{dummyUser.username}</p>
+        <p className='mt-2 text-gray-500'>{dummyUser.bio}</p>
+      </div>
+      <section className='container mx-auto px-4 py-8'>
             <h2 className='text-2xl font-bold text-center mb-6'>Explore Startups</h2>
             <ul className='mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
               {dummyPosts.length > 0 ? (
@@ -81,6 +82,8 @@ export default async function Home() {
               )}
             </ul>
         </section>
-    </>
+    </section>
   );
 }
+
+export default UserPage;
