@@ -1,133 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.container {
-    @apply w-full min-h-[530px] flex justify-center items-center flex-col py-10 px-6;
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+
+@layer utilities {
+  .flex-between {
+    @apply flex justify-between items-center;
   }
 
-.heading {
-    @apply uppercase bg-black px-6 py-3 font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
+  .text-30-extrabold {
+    @apply text-[30px] font-extrabold text-white;
+  }
+
+  .text-30-bold {
+    @apply text-[30px] font-bold text-black;
+  }
+
+  .text-30-semibold {
+    @apply font-semibold text-[30px] text-black;
+  }
+
+  .text-26-semibold {
+    @apply font-semibold text-[26px] text-black;
+  }
+
+  .text-24-black {
+    @apply text-[24px] font-black text-black;
+  }
+
+  .text-20-medium {
+    @apply font-medium text-[20px] text-black;
+  }
+
+  .text-16-medium {
+    @apply font-medium text-[16px] text-black;
+  }
+
+  .text-14-normal {
+    @apply font-normal text-sm text-white-100/80;
+  }
+
+  .pink_container {
+    @apply w-full bg-primary min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;
+  }
+
+  .tag {
+    @apply bg-secondary px-6 py-3 font-work-sans font-bold rounded-sm uppercase relative tag-tri;
+  }
+
+  /*we will follow a set style for heading in the hero section across pages so a create utility classes that can be used later on for efficiency
+  leading property determines line height of text*/
+  
+  .heading {
+    @apply uppercase bg-black px-6 py-3 font-work-sans font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
   }
 
   .sub-heading {
     @apply font-medium text-[20px] text-white max-w-2xl text-center break-words;
   }
 
-  
+  .section_container {
+    @apply px-6 py-10 max-w-7xl mx-auto;
+  }
 
-  @layer base {
-  :root {
+  .card_grid {
+    @apply grid md:grid-cols-3 sm:grid-cols-2 gap-5;
+  }
 
-        --background: 0 0% 100%;
+  .card_grid-sm {
+    @apply grid sm:grid-cols-2 gap-5;
+  }
 
-        --foreground: 222.2 84% 4.9%;
+  .no-result {
+    @apply text-black-100 text-sm font-normal;
+  }
 
-        --card: 0 0% 100%;
+  /* profile */
+  .profile_container {
+    @apply w-full pb-10 pt-20 px-6 max-w-7xl mx-auto lg:flex-row flex-col flex gap-10;
+  }
 
-        --card-foreground: 222.2 84% 4.9%;
+  .profile_card {
+    @apply w-80 px-6 pb-6 pt-20 flex flex-col justify-center items-center bg-primary border-[5px] border-black shadow-100 rounded-[30px] relative z-0 h-fit max-lg:w-full;
+  }
 
-        --popover: 0 0% 100%;
+  .profile_title {
+    @apply w-11/12 bg-white border-[5px] border-black rounded-[20px] px-5 py-3 absolute -top-9 after:absolute after:content-[''] after:-top-1 after:right-0 after:-skew-y-6 after:bg-black after:-z-[1] after:rounded-[20px] after:w-full after:h-[60px] before:absolute before:content-[''] before:-bottom-1 before:left-0  before:-skew-y-6 before:w-full before:h-[60px] before:bg-black  before:-z-[1] before:rounded-[20px] shadow-100;
+  }
 
-        --popover-foreground: 222.2 84% 4.9%;
+  .profile_image {
+    @apply rounded-full object-cover border-[3px] border-black;
+  }
 
-        --primary: 222.2 47.4% 11.2%;
+  /* idea details */
+  .divider {
+    @apply border-dotted bg-zinc-400 max-w-4xl my-10 mx-auto;
+  }
 
-        --primary-foreground: 210 40% 98%;
+  .view_skeleton {
+    @apply bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3;
+  }
 
-        --secondary: 210 40% 96.1%;
+  /* navbar */
+  .avatar {
+    @apply p-0 focus-visible:ring-0 bg-none rounded-full drop-shadow-md !important;
+  }
 
-        --secondary-foreground: 222.2 47.4% 11.2%;
+  .dropdown-menu {
+    @apply w-56 border-[5px] border-black bg-white p-5 rounded-2xl !important;
+  }
 
-        --muted: 210 40% 96.1%;
+  .login {
+    @apply border-[5px] py-4 border-black bg-white text-black relative shadow-100 font-work-sans font-medium hover:shadow-none transition-all duration-500 !important;
+  }
 
-        --muted-foreground: 215.4 16.3% 46.9%;
+  /* searchform */
+  .search-form {
+    @apply max-w-3xl w-full min-h-[80px] bg-white border-[5px] border-black rounded-[80px] text-[24px] mt-8 px-5 flex flex-row items-center gap-5;
+  }
 
-        --accent: 210 40% 96.1%;
+  .search-input {
+    @apply flex-1 font-bold placeholder:font-semibold placeholder:text-black-100 w-full h-auto outline-none;
+  }
 
-        --accent-foreground: 222.2 47.4% 11.2%;
+  .search-btn {
+    @apply size-[50px] rounded-full bg-black flex justify-center items-center !important;
+  }
 
-        --destructive: 0 84.2% 60.2%;
+  /* startupcard */
+  .startup-card {
+    @apply bg-white border-[5px] border-black py-6 px-5 rounded-[22px] shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100;
+  }
 
-        --destructive-foreground: 210 40% 98%;
+  .startup-card_date {
+    @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-full group-hover:bg-white-100;
+  }
 
-        --border: 214.3 31.8% 91.4%;
+  .startup-card_desc {
+    @apply font-normal text-[16px] line-clamp-2 my-3 text-black-100 break-all;
+  }
 
-        --input: 214.3 31.8% 91.4%;
+  .startup-card_img {
+    @apply w-full h-[164px] rounded-[10px] object-cover;
+  }
 
-        --ring: 222.2 84% 4.9%;
+  .startup-card_btn {
+    @apply rounded-full bg-black-200 font-medium text-[16px] text-white px-5 py-3 !important;
+  }
 
-        --chart-1: 12 76% 61%;
+  .startup-card_skeleton {
+    @apply w-full h-96 rounded-[22px] bg-zinc-400;
+  }
 
-        --chart-2: 173 58% 39%;
+  /* startupform */
+  .startup-form {
+    @apply max-w-2xl mx-auto bg-white my-10 space-y-8 px-6;
+  }
 
-        --chart-3: 197 37% 24%;
+  .startup-form_label {
+    @apply font-bold text-[18px] text-black uppercase;
+  }
 
-        --chart-4: 43 74% 66%;
+  .startup-form_input {
+    @apply border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300 !important;
+  }
 
-        --chart-5: 27 87% 67%;
+  .startup-form_textarea {
+    @apply border-[3px] border-black p-5 text-[18px] text-black font-semibold rounded-[20px] mt-3 placeholder:text-black-300 !important;
+  }
 
-        --radius: 0.5rem
-    }
-  .dark {
+  .startup-form_error {
+    @apply text-red-500 mt-2 ml-5;
+  }
 
-        --background: 222.2 84% 4.9%;
+  .startup-form_editor {
+    @apply mt-3 border-[3px] border-black text-[18px] text-black font-semibold placeholder:text-black-300 !important;
+  }
 
-        --foreground: 210 40% 98%;
+  .startup-form_btn {
+    @apply bg-primary border-[4px] border-black rounded-full p-5 min-h-[70px] w-full font-bold text-[18px] !important;
+  }
 
-        --card: 222.2 84% 4.9%;
+  /* view */
+  .view-container {
+    @apply flex justify-end items-center mt-5 fixed bottom-3 right-3;
+  }
 
-        --card-foreground: 210 40% 98%;
+  .view-text {
+    @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-lg capitalize;
+  }
 
-        --popover: 222.2 84% 4.9%;
+  .category-tag {
+    @apply font-medium text-[16px] bg-primary-100 px-4 py-2 rounded-full;
+  }
 
-        --popover-foreground: 210 40% 98%;
+  /*.pattern {
+    background-image: linear-gradient(
+            to right,
+            transparent 49.5%,
+            rgba(251, 232, 67, 0.2) 49.5%,
+            rgba(251, 232, 67, 0.6) 50.5%,
+            transparent 50.5%
+    );
+    background-size: 5% 100%;
+    background-position: center;
+    background-repeat: repeat-x;
+  }*/
 
-        --primary: 210 40% 98%;
-
-        --primary-foreground: 222.2 47.4% 11.2%;
-
-        --secondary: 217.2 32.6% 17.5%;
-
-        --secondary-foreground: 210 40% 98%;
-
-        --muted: 217.2 32.6% 17.5%;
-
-        --muted-foreground: 215 20.2% 65.1%;
-
-        --accent: 217.2 32.6% 17.5%;
-
-        --accent-foreground: 210 40% 98%;
-
-        --destructive: 0 62.8% 30.6%;
-
-        --destructive-foreground: 210 40% 98%;
-
-        --border: 217.2 32.6% 17.5%;
-
-        --input: 217.2 32.6% 17.5%;
-
-        --ring: 212.7 26.8% 83.9%;
-
-        --chart-1: 220 70% 50%;
-
-        --chart-2: 160 60% 45%;
-
-        --chart-3: 30 80% 55%;
-
-        --chart-4: 280 65% 60%;
-
-        --chart-5: 340 75% 55%
-    }
+  .pattern {
+    background-image: radial-gradient(rgba(67, 206, 162, 0.5) 10%, transparent 10%);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+    background-repeat: repeat;
 }
 
-  
 
-  @layer base {
-  * {
-    @apply border-border outline-ring/50;
-    }
-  body {
-    @apply bg-background text-foreground;
-    }
+  .tag-tri {
+    @apply before:content-[''] before:absolute before:top-2 before:left-2 before:border-t-[10px] before:border-t-black before:border-r-[10px] before:border-r-transparent after:content-[''] after:absolute after:bottom-2 after:right-2 after:border-b-[10px] after:border-b-black after:border-l-[10px] after:border-l-transparent;
+  }
+}
+
+.w-md-editor-toolbar {
+  padding: 10px !important;
 }
