@@ -29,37 +29,36 @@ const StartupForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setError({});
-
-    // ✅ Basic Validation
+  
     const errors: Record<string, string> = {};
     Object.entries(formData).forEach(([key, value]) => {
       if (!value.trim()) errors[key] = `${key} is required`;
     });
-
+  
     if (Object.keys(errors).length > 0) {
       setError(errors);
       setIsSubmitting(false);
       return;
     }
-
+  
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`, // 🔒 User must be authenticated
         },
+        credentials: "include", 
         body: JSON.stringify(formData),
       });
-
+  
       const result = await response.json();
-
+  
       if (!response.ok) throw new Error(result.message || "Failed to create post");
-
+  
       toast.success("Your post has been created!");
-      router.push("/"); 
+      router.push("/");
     } catch (error: any) {
-        toast.error(error.message || "Something went wrong");
+      toast.error(error.message || "Something went wrong");
     } finally {
       setIsSubmitting(false);
     }
