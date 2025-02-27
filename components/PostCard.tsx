@@ -13,7 +13,7 @@ interface Post {
   image: string;
   views: number;
   createdAt: string;
-  author: {
+  user: {
     _id: string;
     name: string;
     image: string;
@@ -33,18 +33,18 @@ export default function PostCard({ post }: { post: Post }) {
 
       <div className="flex-between mt-5 gap-5">
         <div className="flex-1">
-          <Link href={`/user/${post.author?._id}`}>
-            <p className="text-16-medium line-clamp-1">{post.author?.name}</p>
+          <Link href={`/user/${post.user?._id}`}>
+            <p className="text-16-medium line-clamp-1">{post.user?.name}</p>
           </Link>
           <Link href={`/startup/${post._id}`}>
             <h3 className="text-26-semibold line-clamp-1">{post.title}</h3>
           </Link>
         </div>
 
-        <Link href={`/user/${post.author?._id}`}>
+        <Link href={`/user/${post.user?._id}`}>
           <Image
-            src={post.author?.image || "/default-avatar.png"}
-            alt={post.author?.name || "User"}
+            src={post.user?.image || "/default-avatar.png"}
+            alt={post.user?.name || "User"}
             width={48}
             height={48}
             className="rounded-full"
