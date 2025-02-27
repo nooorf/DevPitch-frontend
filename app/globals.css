@@ -230,3 +230,14 @@
 .w-md-editor-toolbar {
   padding: 10px !important;
 }
+
+/*---break---*/
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
