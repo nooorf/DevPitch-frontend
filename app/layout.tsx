@@ -44,7 +44,7 @@ const workSans = localFont({
 
 
 export const metadata: Metadata = {
-  title: "Spark Hive",
+  title: "Dev Pitch",
   description: "Showcase amd discover new tech",
 };
 
