@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 7, "column": 0}, "map": {"version":3,"sources":["file:///Users/noorfatima/Desktop/DevPitch-frontend/components/Navbar.tsx/proxy.mjs"],"sourcesContent":["import { registerClientReference } from \"react-server-dom-turbopack/server.edge\";\nexport default registerClientReference(\n    function() { throw new Error(\"Attempted to call the default export of [project]/components/Navbar.tsx <module evaluation> from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.\"); },\n    \"[project]/components/Navbar.tsx <module evaluation>\",\n    \"default\",\n);\n"],"names":[],"mappings":";;;AAAA;;uCACe,CAAA,GAAA,qPAAA,CAAA,0BAAuB,AAAD,EACjC;IAAa,MAAM,IAAI,MAAM;AAAyR,GACtT,uDACA"}},
+    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 21, "column": 0}, "map": {"version":3,"sources":["file:///Users/noorfatima/Desktop/DevPitch-frontend/components/Navbar.tsx/proxy.mjs"],"sourcesContent":["import { registerClientReference } from \"react-server-dom-turbopack/server.edge\";\nexport default registerClientReference(\n    function() { throw new Error(\"Attempted to call the default export of [project]/components/Navbar.tsx from the server, but it's on the client. It's not possible to invoke a client function from the server, it can only be rendered as a Component or passed to props of a Client Component.\"); },\n    \"[project]/components/Navbar.tsx\",\n    \"default\",\n);\n"],"names":[],"mappings":";;;AAAA;;uCACe,CAAA,GAAA,qPAAA,CAAA,0BAAuB,AAAD,EACjC;IAAa,MAAM,IAAI,MAAM;AAAqQ,GAClS,mCACA"}},
+    {"offset": {"line": 29, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 35, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":""}},
+    {"offset": {"line": 39, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}},
+    {"offset": {"line": 45, "column": 0}, "map": {"version":3,"sources":["file:///Users/noorfatima/Desktop/DevPitch-frontend/app/%28root%29/layout.tsx"],"sourcesContent":["import Navbar from \"@/components/Navbar\";\n\nexport default function Layout({ children }: Readonly<{children: React.ReactNode}>) {\n  return (\n      <main className=\"font-work-sans\">\n        <Navbar />\n        {children}\n        </main>\n  );\n}"],"names":[],"mappings":";;;;AAAA;;;AAEe,SAAS,OAAO,EAAE,QAAQ,EAAyC;IAChF,qBACI,8OAAC;QAAK,WAAU;;0BACd,8OAAC,qHAAA,CAAA,UAAM;;;;;YACN;;;;;;;AAGT"}},
+    {"offset": {"line": 69, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"A"}}]
+}
