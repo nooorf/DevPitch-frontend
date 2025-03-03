@@ -153,7 +153,6 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$textarea
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$button$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/components/ui/button.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$sonner$2f$dist$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/sonner/dist/index.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/navigation.js [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$send$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Send$3e$__ = __turbopack_import__("[project]/node_modules/lucide-react/dist/esm/icons/send.js [app-client] (ecmascript) <export default as Send>");
 ;
 var _s = __turbopack_refresh__.signature();
@@ -197,7 +196,7 @@ const StartupForm = ()=>{
             return;
         }
         try {
-            const response = await fetch(`${__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_API_URL}/posts/create`, {
+            const response = await fetch('http://localhost:5000/posts/create', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -472,14 +471,27 @@ const page = ()=>{
     const [isAuthenticated, setIsAuthenticated] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "page.useEffect": ()=>{
-            const token = document.cookie.split('; ').find({
-                "page.useEffect": (row)=>row.startsWith('authToken=')
-            }["page.useEffect"])?.split('=')[1];
-            if (!token) {
-                router.push('/login');
-            } else {
-                setIsAuthenticated(true);
-            }
+            const checkAuth = {
+                "page.useEffect.checkAuth": async ()=>{
+                    console.log("Checking auth in create page");
+                    try {
+                        const res = await fetch("http://localhost:5000/auth/me", {
+                            method: "GET",
+                            credentials: "include"
+                        });
+                        if (!res.ok) {
+                            throw new Error("Not authorized");
+                        }
+                        const user = await res.json();
+                        console.log("IsAuthenticated set. Authenticated user in startup page: ", user);
+                        setIsAuthenticated(true);
+                    } catch (err) {
+                        console.error("Auth check for create page failed: ", err);
+                        router.push("/");
+                    }
+                }
+            }["page.useEffect.checkAuth"];
+            checkAuth();
         }
     }["page.useEffect"], []);
     if (!isAuthenticated) return null;
@@ -492,17 +504,17 @@ const page = ()=>{
                     children: "Submit Your Startup Pitch!"
                 }, void 0, false, {
                     fileName: "[project]/app/(root)/startup/create/page.tsx",
-                    lineNumber: 27,
+                    lineNumber: 36,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/(root)/startup/create/page.tsx",
-                lineNumber: 26,
+                lineNumber: 35,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$StartupForm$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/app/(root)/startup/create/page.tsx",
-                lineNumber: 29,
+                lineNumber: 38,
                 columnNumber: 9
             }, this)
         ]

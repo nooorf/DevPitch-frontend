@@ -50,7 +50,7 @@ const Navbar = () => {
         <div className="flex items-center gap-5 text-black">
           {user ? (
             <>
-              <Link href="http://localhost:5000/posts/create">
+              <Link href="/startup/create">
                 <span className="max-sm:hidden">Create</span>
                 <BadgePlus className="size-6 sm:hidden" />
               </Link>

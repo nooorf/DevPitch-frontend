@@ -8,19 +8,28 @@ const page = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
-    const token = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('authToken='))
-      ?.split('=')[1]
-
-    if (!token) {
-      router.push('/login') 
-    } else {
-      setIsAuthenticated(true)
-    }
+    const checkAuth = async () => {
+      console.log("Checking auth in create page")
+      try{
+        const res = await fetch("http://localhost:5000/auth/me",{
+          method: "GET",
+          credentials: "include",
+        })
+        if (!res.ok){throw new Error("Not authorized")}
+        const user = await res.json();
+        console.log("IsAuthenticated set. Authenticated user in startup page: ", user)
+        setIsAuthenticated(true)
+      }catch(err){
+        console.error("Auth check for create page failed: ", err)
+        router.push("/")
+      } 
+    };
+    
+    checkAuth()
+  
   }, [])
 
-  if (!isAuthenticated) return null 
+  if (!isAuthenticated) return null
   return (
     <>
         <section className='pink_container !min-h-[230px]'>

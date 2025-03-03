@@ -197,7 +197,7 @@ const StartupForm = ()=>{
             return;
         }
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/create`, {
+            const response = await fetch('http://localhost:5000/posts/create', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -458,12 +458,25 @@ const page = ()=>{
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRouter"])();
     const [isAuthenticated, setIsAuthenticated] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        const token = document.cookie.split('; ').find((row)=>row.startsWith('authToken='))?.split('=')[1];
-        if (!token) {
-            router.push('/login');
-        } else {
-            setIsAuthenticated(true);
-        }
+        const checkAuth = async ()=>{
+            console.log("Checking auth in create page");
+            try {
+                const res = await fetch("http://localhost:5000/auth/me", {
+                    method: "GET",
+                    credentials: "include"
+                });
+                if (!res.ok) {
+                    throw new Error("Not authorized");
+                }
+                const user = await res.json();
+                console.log("IsAuthenticated set. Authenticated user in startup page: ", user);
+                setIsAuthenticated(true);
+            } catch (err) {
+                console.error("Auth check for create page failed: ", err);
+                router.push("/");
+            }
+        };
+        checkAuth();
     }, []);
     if (!isAuthenticated) return null;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -475,17 +488,17 @@ const page = ()=>{
                     children: "Submit Your Startup Pitch!"
                 }, void 0, false, {
                     fileName: "[project]/app/(root)/startup/create/page.tsx",
-                    lineNumber: 27,
+                    lineNumber: 36,
                     columnNumber: 13
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/app/(root)/startup/create/page.tsx",
-                lineNumber: 26,
+                lineNumber: 35,
                 columnNumber: 9
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$StartupForm$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/app/(root)/startup/create/page.tsx",
-                lineNumber: 29,
+                lineNumber: 38,
                 columnNumber: 9
             }, this)
         ]

@@ -42,7 +42,7 @@ const StartupForm = () => {
     }
   
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts/create`, {
+      const response = await fetch('http://localhost:5000/posts/create', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
