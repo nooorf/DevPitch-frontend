@@ -13,6 +13,7 @@ const StartupForm = () => {
     title: "",
     description: "",
     category: "",
+    githubRepo: "",
     image: "",
     pitch: "",
   });
@@ -82,6 +83,12 @@ const StartupForm = () => {
         <label htmlFor="category" className="startup-form_label">Category</label>
         <Input id="category" name="category" className="startup-form_input" required placeholder="Tech, AI, Robotics..." value={formData.category} onChange={handleChange} />
         {error.category && <p className="startup-form_error">{error.category}</p>}
+      </div>
+
+      <div>
+        <label htmlFor="githubRepo" className="startup-form_label">Github Repo</label>
+        <Input id="githubRepo" name="githubRepo" className="startup-form_input" required placeholder="Your repo link here" value={formData.githubRepo} onChange={handleChange} />
+        {error.githubRepo && <p className="startup-form_error">{error.githubRepo}</p>}
       </div>
 
       <div>
