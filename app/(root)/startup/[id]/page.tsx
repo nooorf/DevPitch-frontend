@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import  View  from '@/components/View';
 import {Skeleton} from '@/components/ui/skeleton';
+import { FlagIcon } from 'lucide-react';
 
 interface Post {
     _id: string;
@@ -18,7 +19,7 @@ interface Post {
     user: {
       _id: string;
       name: string;
-      image: string; 
+      profilePicture: string; 
       githubUsername: string;   
     };
     pitch: string;
@@ -49,8 +50,8 @@ const page = async ({params}: {params: {id: string}}) => {
         <img src={post.image} alt={post.title} className='w-full h-auto rounded-xl' />
       <div className='space-y-5 mt-10 max-w-4xl mx-auto'>
         <div className='flex-between gap-5'>
-          <Link href={`/user${post.user?._id}`} className='flex gap-2 items-center mb-3'>
-            <Image src={post.user?.image} alt="avatar" width={64} height={64} className='rounded-full drop-shadow-lg' />
+          <Link href={`/user/${post.user._id}`} className='flex gap-2 items-center mb-3'>
+            <Image src={post.user?.profilePicture} alt="avatar" width={64} height={64} className='rounded-full drop-shadow-lg' />
             <div>
               <p className='text-20-medium'>
                 {post.user.name}
@@ -60,9 +61,13 @@ const page = async ({params}: {params: {id: string}}) => {
               </p>
             </div>
           </Link>
-          <p className='category-tag'>
-            {post.category}
-          </p>
+          <div className="flex gap-3.5">
+              <p className='category-tag'>{post.category}</p>
+              <div className='flex gap-1 cursor-pointer'>
+                  <FlagIcon className='size-6 text-red-800 mt-2' />
+                  <p className='text-red-800 mt-2'>Report</p>
+              </div>
+          </div>
         </div>
         <h3 className='text-30-bold'>Pitch Details</h3>
         <article className='prose max-w-4xl font-work-sans break-all'>{post.pitch}</article>

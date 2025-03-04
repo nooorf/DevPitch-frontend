@@ -58,7 +58,7 @@ const Navbar = () => {
               <a href="http://localhost:5000/auth/logout">
                 <LogOut className="cursor-pointer" />
               </a>
-              <Link href={`/users/${user._id}`}>
+              <Link href={`/user/${user._id}`}>
                 <Avatar className="size-10">
                   <AvatarImage src={user.profilePicture || ""} alt={user.name || ""} />
                   <AvatarFallback>{user.name?.charAt(0) || "U"}</AvatarFallback>
