@@ -1,6 +1,6 @@
 {
   "/(root)/page": "app/(root)/page.js",
-  "/_not-found/page": "app/_not-found/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/(root)/startup/[id]/page": "app/(root)/startup/[id]/page.js"
 }

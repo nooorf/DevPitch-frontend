@@ -70,7 +70,7 @@ const page = async ({params}: {params: {id: string}}) => {
       <hr className='divider'/>
 
       <Suspense fallback={<Skeleton className='view_skeleton'/>}> {/*from nextjs for dynamically rendered content; everything above this is static*/}
-          <View id={post._id}/>
+          <View id={id}/>
       </Suspense>
       </section>
     </>

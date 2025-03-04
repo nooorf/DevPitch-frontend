@@ -82,7 +82,7 @@ const View = ({ id })=>{
             const incrementViews = {
                 "View.useEffect.incrementViews": async ()=>{
                     try {
-                        const response = await fetch('http://localhost:5000/api/posts/:id');
+                        const response = await fetch(`http://localhost:5000/posts/views/${id}`);
                         if (!response.ok) {
                             throw new Error("Failed to update views");
                         }
