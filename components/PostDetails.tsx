@@ -19,12 +19,12 @@ interface Post {
     pitch: string;
 }
 
-export default function PostDetails({ post }: { post: Post }) {
+export default function PostDetails({ post}: { post: Post}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const handleReport = async () => {
+    /*const handleReport = async () => {
         try {
-            
+
             const res = await fetch(`http://localhost:5000/posts/${post._id}/report`, { method: "POST" });
             if (!res.ok) throw new Error("Failed to report post");
             alert("Post has been reported successfully!");
@@ -33,7 +33,29 @@ export default function PostDetails({ post }: { post: Post }) {
         } finally {
             setIsModalOpen(false);
         }
+    };*/
+    const handleReport = async () => {
+        try {
+            const res = await fetch(`http://localhost:5000/posts/${post._id}/report`, { 
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include"  // Ensure cookies/token are sent if required
+            });
+    
+            const data = await res.json();
+            console.log("Response:", data);
+    
+            if (!res.ok) throw new Error(data.message || "Failed to report post");
+    
+            alert("Post has been reported successfully!");
+        } catch (error: any) {
+            console.error("Error reporting post:", error);
+            alert(error.message); // Display the actual error
+        } finally {
+            setIsModalOpen(false);
+        }
     };
+    
 
     return (
         <section className="section_container">
