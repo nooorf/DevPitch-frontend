@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { EyeIcon } from "lucide-react";
+import { EyeIcon, FlagIcon} from "lucide-react";
 import { formatDate } from "@/lib/utils"; 
+
 
 interface Post {
   _id: string;
@@ -28,6 +29,7 @@ export default function PostCard({ post }: { post: Post }) {
         <div className="flex gap-1.5">
           <EyeIcon className="size-6 text-primary" />
           <span className="text-16-medium">{post.views}</span>
+          <FlagIcon className="w-6 h-6 text-red-500" />
         </div>
       </div>
 

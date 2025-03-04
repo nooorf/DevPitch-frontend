@@ -25,10 +25,11 @@ interface Post {
 }
 
 const page = async ({params}: {params: {id: string}}) => {
-    const {id} = params;
+    if(!params) return <p className='text-center text-red-500'>Post Not Found</p>;
+    const id = await (params.id);
     let post: Post | null = null;
     try{
-        const res = await fetch(`http://localhost:5000/posts?search=${id}`, {
+        const res = await fetch(`http://localhost:5000/posts/${id}`, {
             cache: "no-store",
         });
         if(!res.ok) throw new Error("Failed to fetch posts");
