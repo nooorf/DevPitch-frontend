@@ -1,11 +1,12 @@
-//startup/[id] : this is a dynamic page for startups
-import React, { Suspense } from 'react'
+
+"use client"
+import React, { Suspense, useState } from 'react'
 import { formatDate } from '@/lib/utils';
 import Link from 'next/link';
 import Image from 'next/image';
 import  View  from '@/components/View';
 import {Skeleton} from '@/components/ui/skeleton';
-import { FlagIcon } from 'lucide-react';
+import { FlagIcon, X } from 'lucide-react';
 
 interface Post {
     _id: string;
@@ -26,8 +27,9 @@ interface Post {
 }
 
 const page = async ({params}: {params: {id: string}}) => {
-    if(!params) return <p className='text-center text-red-500'>Post Not Found</p>;
-    const id = await (params.id);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  if(!params) return <p className='text-center text-red-500'>Post Not Found</p>;
+    const id = params.id;
     let post: Post | null = null;
     try{
         const res = await fetch(`http://localhost:5000/posts/${id}`, {
@@ -39,6 +41,22 @@ const page = async ({params}: {params: {id: string}}) => {
         console.error("Error fetching posts:", error);
     }
     if(!post) return <p className='text-center text-red-500'>Post Not Found</p>;
+
+  const handleReport = async () => {
+    try {
+        const res = await fetch(`http://localhost:5000/posts/report/${post._id}`, {
+            method: "POST",
+        });
+        if (!res.ok) throw new Error("Failed to report post");
+        alert("Post has been reported successfully!");
+    } catch (error) {
+        console.error("Error reporting post:", error);
+    } finally {
+        setIsModalOpen(false);
+    }
+};
+
+    
   return (
     <>
       <section className='pink_container !min-h-[230px]'>
@@ -74,12 +92,41 @@ const page = async ({params}: {params: {id: string}}) => {
       </div>
       <hr className='divider'/>
 
-      <Suspense fallback={<Skeleton className='view_skeleton'/>}> {/*from nextjs for dynamically rendered content; everything above this is static*/}
+      <Suspense fallback={<Skeleton className='view_skeleton'/>}> 
           <View id={id}/>
       </Suspense>
+      {isModalOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="bg-white p-5 rounded-lg shadow-lg w-[400px] relative">
+                            <button
+                                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                <X size={24} />
+                            </button>
+                            <h2 className="text-xl font-semibold mb-4">Report Post</h2>
+                            <p>Are you sure you want to report this post?</p>
+                            <div className="flex justify-end gap-3 mt-4">
+                                <button
+                                    className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                                    onClick={() => setIsModalOpen(false)}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                                    onClick={handleReport}
+                                >
+                                    Proceed
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
       </section>
     </>
   )
 }
 
-export default page
+export default page 
+

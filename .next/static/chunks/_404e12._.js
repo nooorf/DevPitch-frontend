@@ -179,7 +179,137 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 
 var { r: __turbopack_require__, f: __turbopack_module_context__, i: __turbopack_import__, s: __turbopack_esm__, v: __turbopack_export_value__, n: __turbopack_export_namespace__, c: __turbopack_cache__, M: __turbopack_modules__, l: __turbopack_load__, j: __turbopack_dynamic__, P: __turbopack_resolve_absolute_path__, U: __turbopack_relative_url__, R: __turbopack_resolve_module_id_path__, b: __turbopack_worker_blob_url__, g: global, __dirname, k: __turbopack_refresh__, m: module, z: __turbopack_require_stub__ } = __turbopack_context__;
 {
-__turbopack_esm__({
+/*
+"use client"
+import React, { Suspense, useState } from 'react'
+import { formatDate } from '@/lib/utils';
+import Link from 'next/link';
+import Image from 'next/image';
+import  View  from '@/components/View';
+import {Skeleton} from '@/components/ui/skeleton';
+import { FlagIcon, X } from 'lucide-react';
+
+interface Post {
+    _id: string;
+    title: string;
+    description: string;
+    category: string;
+    link: string;
+    createdAt: string;
+    image: string;
+    views: number;
+    user: {
+      _id: string;
+      name: string;
+      profilePicture: string; 
+      githubUsername: string;   
+    };
+    pitch: string;
+}
+
+const page = async ({params}: {params: {id: string}}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  if(!params) return <p className='text-center text-red-500'>Post Not Found</p>;
+    const id = params.id;
+    let post: Post | null = null;
+    try{
+        const res = await fetch(`http://localhost:5000/posts/${id}`, {
+            cache: "no-store",
+        });
+        if(!res.ok) throw new Error("Failed to fetch posts");
+        post = await res.json();
+    } catch (error) {
+        console.error("Error fetching posts:", error);
+    }
+    if(!post) return <p className='text-center text-red-500'>Post Not Found</p>;
+
+  const handleReport = async () => {
+    try {
+        const res = await fetch(`http://localhost:5000/posts/report/${post._id}`, {
+            method: "POST",
+        });
+        if (!res.ok) throw new Error("Failed to report post");
+        alert("Post has been reported successfully!");
+    } catch (error) {
+        console.error("Error reporting post:", error);
+    } finally {
+        setIsModalOpen(false);
+    }
+};
+
+    
+  return (
+    <>
+      <section className='pink_container !min-h-[230px]'>
+        <p className='tag'>{formatDate(post?.createdAt) || formatDate(new Date)}</p>
+        <h1 className='heading'>{post.title}</h1>
+        <p className='sub-heading !max-w-5xl'>{post.description}</p>
+      </section>
+      <section className='section_container'>
+        <img src={post.image} alt={post.title} className='w-full h-auto rounded-xl' />
+      <div className='space-y-5 mt-10 max-w-4xl mx-auto'>
+        <div className='flex-between gap-5'>
+          <Link href={`/user/${post.user._id}`} className='flex gap-2 items-center mb-3'>
+            <Image src={post.user?.profilePicture} alt="avatar" width={64} height={64} className='rounded-full drop-shadow-lg' />
+            <div>
+              <p className='text-20-medium'>
+                {post.user.name}
+              </p>
+              <p className='text-16-medium !text-black-300'>
+                @{post.user.githubUsername}
+              </p>
+            </div>
+          </Link>
+          <div className="flex gap-3.5">
+              <p className='category-tag'>{post.category}</p>
+              <div className='flex gap-1 cursor-pointer'>
+                  <FlagIcon className='size-6 text-red-800 mt-2' />
+                  <p className='text-red-800 mt-2'>Report</p>
+              </div>
+          </div>
+        </div>
+        <h3 className='text-30-bold'>Pitch Details</h3>
+        <article className='prose max-w-4xl font-work-sans break-all'>{post.pitch}</article>
+      </div>
+      <hr className='divider'/>
+
+      <Suspense fallback={<Skeleton className='view_skeleton'/>}> 
+          <View id={id}/>
+      </Suspense>
+      {isModalOpen && (
+                    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                        <div className="bg-white p-5 rounded-lg shadow-lg w-[400px] relative">
+                            <button
+                                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+                                onClick={() => setIsModalOpen(false)}
+                            >
+                                <X size={24} />
+                            </button>
+                            <h2 className="text-xl font-semibold mb-4">Report Post</h2>
+                            <p>Are you sure you want to report this post?</p>
+                            <div className="flex justify-end gap-3 mt-4">
+                                <button
+                                    className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+                                    onClick={() => setIsModalOpen(false)}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                                    onClick={handleReport}
+                                >
+                                    Proceed
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+      </section>
+    </>
+  )
+}
+
+export default page */ __turbopack_esm__({
     "default": (()=>__TURBOPACK__default__export__)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_import__("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
@@ -193,8 +323,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__X$3e$__ = __turbopack_import__("[project]/node_modules/lucide-react/dist/esm/icons/x.js [app-client] (ecmascript) <export default as X>");
 ;
 var _s = __turbopack_refresh__.signature();
-'use client' // Ensure client-side interactivity
-;
+"use client";
 ;
 ;
 ;
@@ -208,7 +337,7 @@ const Page = async ({ params })=>{
         children: "Post Not Found"
     }, void 0, false, {
         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-        lineNumber: 30,
+        lineNumber: 161,
         columnNumber: 25
     }, this);
     const id = params.id;
@@ -227,14 +356,14 @@ const Page = async ({ params })=>{
         children: "Post Not Found"
     }, void 0, false, {
         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-        lineNumber: 44,
+        lineNumber: 173,
         columnNumber: 23
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(PostDetails, {
         post: post
     }, void 0, false, {
         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-        lineNumber: 46,
+        lineNumber: 175,
         columnNumber: 12
     }, this);
 };
@@ -244,7 +373,8 @@ const PostDetails = ({ post })=>{
     const [isModalOpen, setIsModalOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const handleReport = async ()=>{
         try {
-            const res = await fetch(`http://localhost:5000/posts/${post._id}/report`, {
+            const id = post._id;
+            const res = await fetch(`http://localhost:5000/posts/${id}/report`, {
                 method: "POST"
             });
             if (!res.ok) throw new Error("Failed to report post");
@@ -262,10 +392,10 @@ const PostDetails = ({ post })=>{
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "tag",
-                        children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["formatDate"])(post?.createdAt) || (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["formatDate"])(new Date)
+                        children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["formatDate"])(post?.createdAt) || (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$utils$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["formatDate"])(new Date())
                     }, void 0, false, {
                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                        lineNumber: 69,
+                        lineNumber: 199,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -273,7 +403,7 @@ const PostDetails = ({ post })=>{
                         children: post.title
                     }, void 0, false, {
                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                        lineNumber: 70,
+                        lineNumber: 200,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -281,13 +411,13 @@ const PostDetails = ({ post })=>{
                         children: post.description
                     }, void 0, false, {
                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                        lineNumber: 71,
+                        lineNumber: 201,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                lineNumber: 68,
+                lineNumber: 198,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -299,7 +429,7 @@ const PostDetails = ({ post })=>{
                         className: "w-full h-auto rounded-xl"
                     }, void 0, false, {
                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                        lineNumber: 74,
+                        lineNumber: 204,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -309,51 +439,51 @@ const PostDetails = ({ post })=>{
                                 className: "flex-between gap-5",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                        href: `/user/${post.user?._id}`,
+                                        href: `/user/${post?.user?._id}`,
                                         className: "flex gap-2 items-center mb-3",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                                src: post.user?.profilePicture,
+                                                src: post?.user?.profilePicture,
                                                 alt: "avatar",
                                                 width: 64,
                                                 height: 64,
                                                 className: "rounded-full drop-shadow-lg"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                                lineNumber: 78,
+                                                lineNumber: 208,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "text-20-medium",
-                                                        children: post.user.name
+                                                        children: post?.user?.name
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                                        lineNumber: 80,
+                                                        lineNumber: 216,
                                                         columnNumber: 33
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                         className: "text-16-medium !text-black-300",
                                                         children: [
                                                             "@",
-                                                            post.user.githubUsername
+                                                            post?.user?.githubUsername
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                                        lineNumber: 81,
+                                                        lineNumber: 217,
                                                         columnNumber: 33
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                                lineNumber: 79,
+                                                lineNumber: 215,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                        lineNumber: 77,
+                                        lineNumber: 207,
                                         columnNumber: 25
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -364,7 +494,7 @@ const PostDetails = ({ post })=>{
                                                 children: post.category
                                             }, void 0, false, {
                                                 fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                                lineNumber: 86,
+                                                lineNumber: 221,
                                                 columnNumber: 29
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -375,7 +505,7 @@ const PostDetails = ({ post })=>{
                                                         className: "size-6 text-red-800 mt-2"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                                        lineNumber: 91,
+                                                        lineNumber: 226,
                                                         columnNumber: 33
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -383,25 +513,25 @@ const PostDetails = ({ post })=>{
                                                         children: "Report"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                                        lineNumber: 92,
+                                                        lineNumber: 227,
                                                         columnNumber: 33
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                                lineNumber: 87,
+                                                lineNumber: 222,
                                                 columnNumber: 29
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                        lineNumber: 85,
+                                        lineNumber: 220,
                                         columnNumber: 25
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                lineNumber: 76,
+                                lineNumber: 206,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -409,7 +539,7 @@ const PostDetails = ({ post })=>{
                                 children: "Pitch Details"
                             }, void 0, false, {
                                 fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                lineNumber: 96,
+                                lineNumber: 231,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("article", {
@@ -417,20 +547,20 @@ const PostDetails = ({ post })=>{
                                 children: post.pitch
                             }, void 0, false, {
                                 fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                lineNumber: 97,
+                                lineNumber: 232,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                        lineNumber: 75,
+                        lineNumber: 205,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("hr", {
                         className: "divider"
                     }, void 0, false, {
                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                        lineNumber: 99,
+                        lineNumber: 234,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Suspense"], {
@@ -438,19 +568,19 @@ const PostDetails = ({ post })=>{
                             className: "view_skeleton"
                         }, void 0, false, {
                             fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                            lineNumber: 101,
+                            lineNumber: 236,
                             columnNumber: 37
                         }, void 0),
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$View$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             id: post._id
                         }, void 0, false, {
                             fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                            lineNumber: 102,
+                            lineNumber: 237,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                        lineNumber: 101,
+                        lineNumber: 236,
                         columnNumber: 17
                     }, this),
                     isModalOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -465,12 +595,12 @@ const PostDetails = ({ post })=>{
                                         size: 24
                                     }, void 0, false, {
                                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                        lineNumber: 113,
+                                        lineNumber: 248,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                    lineNumber: 109,
+                                    lineNumber: 244,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -478,14 +608,14 @@ const PostDetails = ({ post })=>{
                                     children: "Report Post"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                    lineNumber: 115,
+                                    lineNumber: 250,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     children: "Are you sure you want to report this post?"
                                 }, void 0, false, {
                                     fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                    lineNumber: 116,
+                                    lineNumber: 251,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -497,7 +627,7 @@ const PostDetails = ({ post })=>{
                                             children: "Cancel"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                            lineNumber: 118,
+                                            lineNumber: 253,
                                             columnNumber: 33
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -506,30 +636,30 @@ const PostDetails = ({ post })=>{
                                             children: "Proceed"
                                         }, void 0, false, {
                                             fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                            lineNumber: 124,
+                                            lineNumber: 259,
                                             columnNumber: 33
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                                    lineNumber: 117,
+                                    lineNumber: 252,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                            lineNumber: 108,
+                            lineNumber: 243,
                             columnNumber: 25
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                        lineNumber: 107,
+                        lineNumber: 242,
                         columnNumber: 21
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/app/(root)/startup/[id]/page.tsx",
-                lineNumber: 73,
+                lineNumber: 203,
                 columnNumber: 13
             }, this)
         ]
