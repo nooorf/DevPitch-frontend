@@ -13,7 +13,7 @@ interface Post {
   user: {
     _id: string;
     name: string;
-    image: string; 
+    profilePicture: string; 
   };
 }
 
