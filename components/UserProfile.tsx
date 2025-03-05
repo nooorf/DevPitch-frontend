@@ -13,7 +13,6 @@ const UserStartups = async ({ id }: { id: string }) => {
 
     return (
       <>
-        <h1 className="text-xl font-bold mb-4">My Startups</h1>
         <ul>
           {startups.length > 0 ? (
             startups.map((startup: any) => <PostCard key={startup._id} post={startup} />)
