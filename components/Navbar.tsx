@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { LogIn, LogOut, BadgePlus } from "lucide-react";
+import { LogIn, LogOut, BadgePlus, ShieldCheck } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
 
@@ -13,6 +13,7 @@ type User = {
   githubUsername: string;
   email: string;
   profilePicture?: string;
+  role: string;
 };
 
 const Navbar = () => {
@@ -49,22 +50,35 @@ const Navbar = () => {
         </Link>
         <div className="flex items-center gap-5 text-black">
           {user ? (
-            <>
-              <Link href="/startup/create">
-                <span className="max-sm:hidden">Create</span>
-                <BadgePlus className="size-6 sm:hidden" />
-              </Link>
+            user.role === "moderator" ? (
+              <>
+                <Link href={`/moderator/${user._id}`} className="flex items-center gap-2">
+                  <ShieldCheck className="size-6" />
+                  <span className="max-sm:hidden">Moderator</span>
+                </Link>
+                <a href="http://localhost:5000/auth/logout">
+                  <LogOut className="cursor-pointer" />
+                </a>
+              </>
+            ) : (
+              <>
+                <Link href="/startup/create">
+                  <span className="max-sm:hidden">Create</span>
+                  <BadgePlus className="size-6 sm:hidden" />
+                </Link>
 
-              <a href="http://localhost:5000/auth/logout">
-                <LogOut className="cursor-pointer" />
-              </a>
-              <Link href={`/user/${user._id}`}>
-                <Avatar className="size-10">
-                  <AvatarImage src={user.profilePicture || ""} alt={user.name || ""} />
-                  <AvatarFallback>{user.name?.charAt(0) || "U"}</AvatarFallback>
-                </Avatar>
-              </Link>
-            </>
+                <a href="http://localhost:5000/auth/logout">
+                  <LogOut className="cursor-pointer" />
+                </a>
+                <Link href={`/user/${user._id}`}>
+                  <Avatar className="size-10">
+                    <AvatarImage src={user.profilePicture || ""} alt={user.name || ""} />
+                    <AvatarFallback>{user.name?.charAt(0) || "U"}</AvatarFallback>
+                  </Avatar>
+                </Link>
+              </>
+            )
+            
           ) : (
             <a href="http://localhost:5000/auth/github">
               <LogIn className="cursor-pointer" />
