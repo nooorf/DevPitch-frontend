@@ -3,7 +3,7 @@ import PostCard from './PostCard'
 
 const ModeratorDisplay = async () => {
     try {
-        const res = await fetch(`http://localhost:5000/posts/reported`, {
+        const res = await fetch('http://localhost:5000/posts/reported', {
           cache: "no-store", 
         });
     

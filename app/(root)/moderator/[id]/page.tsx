@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Image from 'next/image';
 import ModeratorDisplay from '@/components/ModeratorDisplay';
 
@@ -10,6 +10,7 @@ interface Moderator {
     bio?: string;
     role: string;
 }
+
 const getUser = async (id: string): Promise<Moderator | null> => {
     try {
         const res = await fetch(`http://localhost:5000/users/${id}`, { cache: "no-store" });
@@ -19,41 +20,47 @@ const getUser = async (id: string): Promise<Moderator | null> => {
         console.error("Error fetching user:", error);
         return null;
     }
-}
-const page = async ({ params }: { params: {id: string} }) => {
+};
+
+const page = async ({ params }: { params: { id: string } }) => {
+    if (!params?.id) return <p className="text-red-500">Invalid moderator ID</p>;
+
     const moderator = await getUser(params.id);
-    if(!moderator) {return <p className='text-red-500'>Moderator not found</p>}
-    if(moderator.role !== 'moderator') {
-        return <p className='text-red-500'>You are not authorised to access this page.</p>
+    if (!moderator) {
+        return <p className="text-red-500">Moderator not found</p>;
     }
-  return (
-   <>
-    <section className='profile_container'>
-        <div className='profile_card'>
-            <div className='profile_title'>
-                <h3 className='text-24-black uppercase text-center line-clamp-1'>
-                    {moderator.name}
-                </h3>
-            </div>
-            <Image src={moderator.profilePicture || "default-avatar.png"}  
-                    alt={moderator.name} 
-                    width={220} 
-                    height={220} 
-                    className="profile_image"
-            />
-            <p className='text-30-extrabold mt-7 text-center'>@{moderator?.githubUsername}</p>
-            <p className='mt-1 text-center text-14-normal'>{moderator?.bio}</p>
+    if (moderator.role !== 'moderator') {
+        return <p className="text-red-500">You are not authorized to access this page.</p>;
+    }
 
-        </div>
-        <div className='flex-1 flex flex-col gap-5 lg:-mt-5'>
-            <p className='text-30-bold'>Reported Posts</p>
-            <ul className='card_grid-sm'>
-                    <ModeratorDisplay/>
-            </ul>
-        </div>
-    </section>
-   </>
-  )
-}
+    return (
+        <>
+            <section className="profile_container">
+                <div className="profile_card">
+                    <div className="profile_title">
+                        <h3 className="text-24-black uppercase text-center line-clamp-1">
+                            {moderator.name}
+                        </h3>
+                    </div>
+                    <Image
+                        src={moderator.profilePicture || "/default-avatar.png"}
+                        alt={moderator.name}
+                        width={220}
+                        height={220}
+                        className="profile_image"
+                    />
+                    <p className="text-30-extrabold mt-7 text-center">@{moderator.githubUsername}</p>
+                    <p className="mt-1 text-center text-14-normal">{moderator.bio}</p>
+                </div>
+                <div className="flex-1 flex flex-col gap-5 lg:-mt-5">
+                    <p className="text-30-bold">Reported Posts</p>
+                    <ul className="card_grid-sm">
+                        <ModeratorDisplay />
+                    </ul>
+                </div>
+            </section>
+        </>
+    );
+};
 
-export default page
+export default page;
