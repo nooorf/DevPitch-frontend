@@ -1,7 +1,6 @@
-
 import React from 'react'
 import Image from 'next/image';
-import UserProfile from '@/components/UserProfile';
+import ModeratorDisplay from '@/components/ModeratorDisplay';
 
 interface Moderator {
     _id: string;
@@ -49,7 +48,7 @@ const page = async ({ params }: { params: {id: string} }) => {
         <div className='flex-1 flex flex-col gap-5 lg:-mt-5'>
             <p className='text-30-bold'>Reported Posts</p>
             <ul className='card_grid-sm'>
-                    {/** Display reported posts */}
+                    <ModeratorDisplay/>
             </ul>
         </div>
     </section>
