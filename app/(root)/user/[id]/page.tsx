@@ -1,9 +1,7 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation';
+
+import React from 'react'
 import Image from 'next/image';
 import UserProfile from '@/components/UserProfile';
-import {toast} from 'sonner';
 
 interface User {
     _id: string;
@@ -12,32 +10,20 @@ interface User {
     profilePicture: string;
     bio?: string;
 }
+const getUser = async (id: string): Promise<User | null> => {
+    try {
+        const res = await fetch(`http://localhost:5000/users/${id}`, { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to fetch user");
+        return res.json();
+    } catch (error) {
+        console.error("Error fetching user:", error);
+        return null;
+    }
+}
+const page = async ({ params }: { params: {id: string} }) => {
+    const user = await getUser(params.id);
 
-const page = () => {
-    const [user, setUser] = useState<User | null>(null);
-    const router = useRouter();
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const res = await fetch("http://localhost:5000/auth/me", {
-                    credentials: 'include',
-                });
-
-                if(!res.ok) {
-                    throw new Error('Failed to fetch user data');
-                }
-                const userData = await res.json();
-                setUser(userData);
-            } catch (error) {
-                toast.error('Error fetching user details. Please try again');
-                //create login page
-                router.push('/login');
-            }
-        }
-    }, [router]);
-
-    if(!user) {return <p>Loading...</p>}
+    if(!user) {return <p className='text-red-500'>User not found</p>}
   return (
    <>
     <section className='profile_container'>
@@ -58,7 +44,7 @@ const page = () => {
 
         </div>
         <div className='flex-1 flex flex-col gap-5 lg:-mt-5'>
-            <p className='text-30-bold'>Your Posts</p>
+            <p className='text-30-bold'>All Posts</p>
             <ul className='card_grid-sm'>
                     <UserProfile id={user._id}/>
             </ul>

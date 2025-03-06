@@ -17,11 +17,12 @@ interface Post {
   user: {
     _id: string;
     name: string;
-    image: string;
+    profilePicture: string;
   };
 }
 
 export default function PostCard({ post }: { post: Post }) {
+  console.log("Post received in PostCard: " , post);
   return (
     <li className="startup-card group">
       <div className="flex-between">
@@ -44,7 +45,7 @@ export default function PostCard({ post }: { post: Post }) {
 
         <Link href={`/user/${post.user?._id}`}>
           <Image
-            src={post.user?.image || "/default-avatar.png"}
+            src={post.user?.profilePicture }
             alt={post.user?.name || "User"}
             width={48}
             height={48}

@@ -21,19 +21,6 @@ interface Post {
 
 export default function PostDetails({ post}: { post: Post}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
-    /*const handleReport = async () => {
-        try {
-
-            const res = await fetch(`http://localhost:5000/posts/${post._id}/report`, { method: "POST" });
-            if (!res.ok) throw new Error("Failed to report post");
-            alert("Post has been reported successfully!");
-        } catch (error) {
-            console.error("Error reporting post:", error);
-        } finally {
-            setIsModalOpen(false);
-        }
-    };*/
     const handleReport = async () => {
         try {
             const res = await fetch(`http://localhost:5000/posts/${post._id}/report`, { 
@@ -50,7 +37,7 @@ export default function PostDetails({ post}: { post: Post}) {
             alert("Post has been reported successfully!");
         } catch (error: any) {
             console.error("Error reporting post:", error);
-            alert(error.message); // Display the actual error
+            alert(error.message); 
         } finally {
             setIsModalOpen(false);
         }
