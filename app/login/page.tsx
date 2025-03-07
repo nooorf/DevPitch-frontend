@@ -65,15 +65,18 @@ const Login = () => {
       if (!response.ok) throw new Error(result.msg || "Invalid OTP");
 
       toast.success("Email verified, login successful!");
-      router.push("/"); // Redirect after successful verification
+      console.log(result.isExisting);
+      if(result.isExisting) router.push("/");
+      else
+      router.push("/userinfo");
     } catch (error: any) {
       toast.error(error.message || "Invalid OTP");
     }
   };
 
   return (
-    <div className="startup-card startup-form">
-      <h1 className="heading">Login</h1>
+    <div className="startup-card startup-form !max-w-sm !my-16">
+      <h1 className="heading rounded-xl">Login</h1>
       {step === "email" ? (
         <form onSubmit={handleEmailSubmit} className="startup-form">
           <div>
