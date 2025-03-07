@@ -1,6 +1,8 @@
+
 import React from 'react';
 import Image from 'next/image';
 import ModeratorDisplay from '@/components/ModeratorDisplay';
+import { notFound } from "next/navigation";
 
 interface Moderator {
     _id: string;
@@ -21,20 +23,13 @@ const getUser = async (id: string): Promise<Moderator | null> => {
         return null;
     }
 };
+export default async function Page ({ params }: { params: { id: string } }) {
+        const id = params.id;
+        if (!id) return notFound();
 
-const page = async ({ params }: { params: { id: string } }) => {
-    if (!params?.id) return <p className="text-red-500">Invalid moderator ID</p>;
-
-    const moderator = await getUser(params.id);
-    if (!moderator) {
-        return <p className="text-red-500">Moderator not found</p>;
-    }
-    if (moderator.role !== 'moderator') {
-        return <p className="text-red-500">You are not authorized to access this page.</p>;
-    }
-
-    return (
-        <>
+        const moderator = await getUser(id);
+        if (!moderator) return notFound();
+        return (
             <section className="profile_container">
                 <div className="profile_card">
                     <div className="profile_title">
@@ -59,8 +54,6 @@ const page = async ({ params }: { params: { id: string } }) => {
                     </ul>
                 </div>
             </section>
-        </>
-    );
+        );
 };
 
-export default page;
