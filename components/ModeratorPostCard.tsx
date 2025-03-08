@@ -24,6 +24,24 @@ interface Post {
 
 export default function PostCard({ post }: { post: Post }) {
   console.log("Post received in PostCard: " , post);
+
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/posts/delete/${post._id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete item");
+      }
+
+      console.log("Item deleted successfully");
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
+
   return (
     <li className="startup-card-moderator group">
       <div className="flex-between">
@@ -71,7 +89,7 @@ export default function PostCard({ post }: { post: Post }) {
       <div className="flex-between mt-5">
       <div className="flex gap-2 mt-5">
       <a href="#">
-          <button className="startup-card_btn-moderator_remove "><X/></button>
+          <button onClick={handleDelete} className="startup-card_btn-moderator_remove "><X/></button>
        </a>
         <a href="#">
           <button className="startup-card_btn-moderator_keep"><Check/></button>
