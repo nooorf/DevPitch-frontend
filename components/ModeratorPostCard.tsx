@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { EyeIcon, X, Check } from "lucide-react";
 import { formatDate } from "@/lib/utils"; 
-
+import ReportNumber from "./ReportNumber";
 
 interface Post {
   _id: string;
@@ -68,6 +68,7 @@ export default function PostCard({ post }: { post: Post }) {
           <button className="startup-card_btn">Details</button>
         </Link>
       </div>
+      <div className="flex-between mt-5">
       <div className="flex gap-2 mt-5">
       <a href="#">
           <button className="startup-card_btn-moderator_remove "><X/></button>
@@ -76,6 +77,9 @@ export default function PostCard({ post }: { post: Post }) {
           <button className="startup-card_btn-moderator_keep"><Check/></button>
         </a>
       </div>
+      <ReportNumber reportCount={post.reportCount} />
+      </div>
+      
     </li>
   );
 }

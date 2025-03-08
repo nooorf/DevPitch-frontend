@@ -1,4 +1,3 @@
-
 import Ping from "./Ping";
 
 const ReportNumber = ({ reportCount }: { reportCount: number }) => {
