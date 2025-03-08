@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import PostCard from "./PostCard";
+import ModeratorPostCard from "./ModeratorPostCard";
 
 interface Post {
   _id: string;
@@ -49,7 +50,7 @@ const ModeratorDisplay = () => {
     <>
       <ul>
         {startups && startups.length > 0 ? (
-          startups.map((startup) => <PostCard key={startup._id} post={startup} />)
+          startups.map((startup) => <ModeratorPostCard  key={startup._id} post={startup} />)
         ) : (
           <p>No posts have been reported yet</p>
         )}
