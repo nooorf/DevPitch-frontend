@@ -42,6 +42,23 @@ export default function PostCard({ post }: { post: Post }) {
     }
   };
 
+  const handleKeep = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/posts/${post._id}`, {
+        method: "PUT",
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update item");
+      }
+
+      console.log("Item updated successfully");
+    } catch (error) {
+      console.error("Error updating item:", error);
+    }
+  };
+
   return (
     <li className="startup-card-moderator group">
       <div className="flex-between">
@@ -92,7 +109,7 @@ export default function PostCard({ post }: { post: Post }) {
           <button onClick={handleDelete} className="startup-card_btn-moderator_remove "><X/></button>
        </a>
         <a href="#">
-          <button className="startup-card_btn-moderator_keep"><Check/></button>
+          <button onClick={handleKeep} className="startup-card_btn-moderator_keep"><Check/></button>
         </a>
       </div>
       <ReportNumber reportCount={post.reportCount} />
