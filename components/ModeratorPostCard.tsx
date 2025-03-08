@@ -27,7 +27,7 @@ export default function PostCard({ post }: { post: Post }) {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/posts/delete/${post._id}`, {
+      const response = await fetch(`http://localhost:5000/posts/${post._id}`, {
         method: "DELETE",
         credentials: "include",
       });
