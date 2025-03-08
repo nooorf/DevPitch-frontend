@@ -25,7 +25,7 @@ interface Post {
 export default function PostCard({ post }: { post: Post }) {
   console.log("Post received in PostCard: " , post);
   return (
-    <li className="startup-card group">
+    <li className="startup-card-moderator group">
       <div className="flex-between">
         <p className="startup_card_date">{post.createdAt ? formatDate(post.createdAt) : formatDate(new Date().toISOString())}</p>
         <div className="flex gap-1.5">
