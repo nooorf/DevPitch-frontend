@@ -19,6 +19,7 @@ interface Post {
     name: string;
     profilePicture: string;
   };
+  reportCount: number;
 }
 
 export default function PostCard({ post }: { post: Post }) {
