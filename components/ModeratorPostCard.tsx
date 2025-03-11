@@ -5,22 +5,7 @@ import Image from "next/image";
 import { EyeIcon, X, Check } from "lucide-react";
 import { formatDate } from "@/lib/utils"; 
 import ReportNumber from "./ReportNumber";
-
-interface Post {
-  _id: string;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  views: number;
-  createdAt: string;
-  user: {
-    _id: string;
-    name: string;
-    profilePicture: string;
-  };
-  reportCount: number;
-}
+import { Post } from "@/types/post";
 
 export default function PostCard({ post, onPostUpdate }: { post: Post, onPostUpdate: (postId: string) => void }) {
   console.log("Post received in PostCard: " , post);

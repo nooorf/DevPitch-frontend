@@ -1,21 +1,7 @@
 import SearchForm from "@/components/SearchForm";
 import PostCard from "@/components/PostCard";
+import { Post } from "@/types/post";
 
-interface Post {
-  _id: string;
-  title: string;
-  description: string;
-  category: string;
-  link: string;
-  createdAt: string;
-  image: string;
-  views: number;
-  user: {
-    _id: string;
-    name: string;
-    profilePicture: string; 
-  };
-}
 
 export default async function Home({ searchParams }: { searchParams: { query?: string } }) {
   const query = searchParams.query || "";

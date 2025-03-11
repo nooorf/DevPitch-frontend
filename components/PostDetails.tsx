@@ -4,21 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FlagIcon, X } from "lucide-react";
 import useAuth from "@/hooks/useAuth";
-
-interface Post {
-    _id: string;
-    title: string;
-    description: string;
-    category: string;
-    image: string;
-    user: {
-        _id: string;
-        name: string;
-        profilePicture: string;
-        githubUsername: string;
-    };
-    pitch: string;
-}
+import { Post } from "@/types/post";
 
 export default function PostDetails({ post}: { post: Post}) {
     const { user, loading } = useAuth();
@@ -33,7 +19,7 @@ export default function PostDetails({ post}: { post: Post}) {
             const res = await fetch(`http://localhost:5000/posts/${post._id}/report`, { 
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                credentials: "include"  // Ensure cookies/token are sent if required
+                credentials: "include"  
             });
     
             const data = await res.json();

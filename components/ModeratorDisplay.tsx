@@ -2,22 +2,7 @@
 import React, { useEffect, useState } from "react";
 import PostCard from "./PostCard";
 import ModeratorPostCard from "./ModeratorPostCard";
-
-interface Post {
-  _id: string;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  views: number;
-  createdAt: string;
-  user: {
-    _id: string;
-    name: string;
-    profilePicture: string;
-  };
-  reportCount: number;
-}
+import { Post } from "@/types/post";
 
 const ModeratorDisplay = () => {
   const [startups, setStartups] = useState<Post[] | null>(null);

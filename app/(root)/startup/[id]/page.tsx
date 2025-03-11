@@ -5,24 +5,7 @@ import { formatDate } from "@/lib/utils";
 import View from "@/components/View";
 import PostDetails from "@/components/PostDetails";
 import { Skeleton } from "@/components/ui/skeleton";
-
-interface Post {
-    _id: string;
-    title: string;
-    description: string;
-    category: string;
-    link: string;
-    createdAt: string;
-    image: string;
-    views: number;
-    user: {
-        _id: string;
-        name: string;
-        profilePicture: string;
-        githubUsername: string;
-    };
-    pitch: string;
-}
+import { Post } from "@/types/post";
 
 async function getPost(id: string): Promise<Post | null> {
     try {

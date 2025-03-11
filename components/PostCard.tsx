@@ -4,22 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { EyeIcon } from "lucide-react";
 import { formatDate } from "@/lib/utils"; 
-
-
-interface Post {
-  _id: string;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  views: number;
-  createdAt: string;
-  user: {
-    _id: string;
-    name: string;
-    profilePicture: string;
-  };
-}
+import { Post } from "@/types/post";
 
 export default function PostCard({ post }: { post: Post }) {
   console.log("Post received in PostCard: " , post);
