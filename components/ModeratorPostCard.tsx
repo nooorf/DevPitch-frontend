@@ -22,7 +22,7 @@ interface Post {
   reportCount: number;
 }
 
-export default function PostCard({ post }: { post: Post }) {
+export default function PostCard({ post, onPostUpdate }: { post: Post, onPostUpdate: (postId: string) => void }) {
   console.log("Post received in PostCard: " , post);
 
   const handleDelete = async () => {

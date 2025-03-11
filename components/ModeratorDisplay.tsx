@@ -29,7 +29,7 @@ const ModeratorDisplay = () => {
       return prevStartups.filter((post) => post._id !== postId);
     });
   };
-  
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -57,7 +57,7 @@ const ModeratorDisplay = () => {
     <>
       <ul>
         {startups && startups.length > 0 ? (
-          startups.map((startup) => <ModeratorPostCard  key={startup._id} post={startup} />)
+          startups.map((startup) => <ModeratorPostCard  key={startup._id} post={startup} onPostUpdate={handlePostUpdate}/>)
         ) : (
           <p>No posts have been reported yet</p>
         )}
