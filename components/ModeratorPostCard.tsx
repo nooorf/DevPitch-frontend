@@ -37,6 +37,7 @@ export default function PostCard({ post, onPostUpdate }: { post: Post, onPostUpd
       }
 
       console.log("Item deleted successfully");
+      onPostUpdate(post._id);
     } catch (error) {
       console.error("Error deleting item:", error);
     }
@@ -54,6 +55,7 @@ export default function PostCard({ post, onPostUpdate }: { post: Post, onPostUpd
       }
 
       console.log("Item updated successfully");
+      onPostUpdate(post._id);
     } catch (error) {
       console.error("Error updating item:", error);
     }
