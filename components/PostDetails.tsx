@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FlagIcon, X } from "lucide-react";
+import useAuth from "@/hooks/useAuth";
 
 interface Post {
     _id: string;
@@ -20,8 +21,14 @@ interface Post {
 }
 
 export default function PostDetails({ post}: { post: Post}) {
+    const { user, loading } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const isDisabled = loading || !user || user.role === "moderator";
     const handleReport = async () => {
+        if (!user) {
+            alert("You need to log in to report posts.");
+            return;
+        }
         try {
             const res = await fetch(`http://localhost:5000/posts/${post._id}/report`, { 
                 method: "POST",
@@ -58,7 +65,7 @@ export default function PostDetails({ post}: { post: Post}) {
                     </Link>
                     <div className="flex gap-3.5">
                         <p className="category-tag">{post.category}</p>
-                        <div className="flex gap-1 cursor-pointer" onClick={() => setIsModalOpen(true)}>
+                        <div className={`flex gap-1 cursor-pointer" ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}`} onClick={() => !isDisabled && setIsModalOpen(true)}>
                             <FlagIcon className="size-6 text-red-800 mt-2" />
                             <p className="text-red-800 mt-2">Report</p>
                         </div>
