@@ -23,6 +23,13 @@ const ModeratorDisplay = () => {
   const [startups, setStartups] = useState<Post[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  const handlePostUpdate = (postId: string) => {
+    setStartups((prevStartups) => {
+      if (!prevStartups) return null;
+      return prevStartups.filter((post) => post._id !== postId);
+    });
+  };
+  
   useEffect(() => {
     const fetchPosts = async () => {
       try {
