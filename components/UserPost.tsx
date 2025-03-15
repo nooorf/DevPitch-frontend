@@ -21,7 +21,7 @@ interface Post {
   };
 }
 
-export default function PostCard({ post }: { post: Post }) {
+export default function UserPost({ post }: { post: Post }) {
   console.log("Post received in PostCard: " , post);
   return (
     <li className="startup-card group">
@@ -63,7 +63,10 @@ export default function PostCard({ post }: { post: Post }) {
         <Link href={`/query=${post.category?.toLowerCase()}`}>
           <p className="text-16-medium">{post.category}</p>
         </Link>
-        <div className="flex gap-2">
+        <div id="edit_details" className="flex gap-2">
+        <Link href={`/startup/edit/${post._id}`}>
+          <button className="startup-card_btn">Edit</button>
+        </Link>
         <Link href={`/startup/${post._id}`}>
           <button className="startup-card_btn">Details</button>
         </Link>

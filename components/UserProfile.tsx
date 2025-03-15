@@ -1,5 +1,5 @@
 import React from "react";
-import PostCard from "./PostCard";
+import UserPosts from "./UserPost";
 
 const UserStartups = async ({ id }: { id: string }) => {
   try {
@@ -15,7 +15,8 @@ const UserStartups = async ({ id }: { id: string }) => {
       <>
         <ul>
           {startups.length > 0 ? (
-            startups.map((startup: any) => <PostCard key={startup._id} post={startup} />)
+            startups.map((startup: any) => <UserPosts key={startup._id} post={startup} />
+          )
           ) : (
             <p>No posts created yet</p>
           )}
