@@ -82,6 +82,7 @@ const UserInfo = () => {
   };
 
   return (
+    
     <form onSubmit={handleSubmit} className="startup-form border-4 border-black-200 p-4 rounded-lg !max-w-xl">
       <h1 className="heading rounded-xl">User Info</h1>
       <div>

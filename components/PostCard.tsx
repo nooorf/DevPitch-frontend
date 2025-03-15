@@ -59,13 +59,18 @@ export default function PostCard({ post }: { post: Post }) {
         <img src={post.image} className="startup-card_img" />
       </Link>
 
-      <div className="flex-between gap-3 mt-5">
+      <div className="flex-between mt-5">
         <Link href={`/query=${post.category?.toLowerCase()}`}>
           <p className="text-16-medium">{post.category}</p>
+        </Link>
+        <div id="edit_details" className="flex gap-2">
+        <Link href={`/startup/edit/${post._id}`}>
+          <button className="startup-card_btn">Edit</button>
         </Link>
         <Link href={`/startup/${post._id}`}>
           <button className="startup-card_btn">Details</button>
         </Link>
+        </div>
       </div>
     </li>
   );
