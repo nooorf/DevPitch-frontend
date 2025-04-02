@@ -80,9 +80,9 @@ const Navbar = () => {
             )
             
           ) : (
-            <a href="http://localhost:5000/auth/github">
+            <Link href="/login">
               <LogIn className="cursor-pointer" />
-            </a>
+            </Link>
           )}
         </div>
       </nav>
