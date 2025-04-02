@@ -1,6 +1,6 @@
 import SearchForm from "@/components/SearchForm";
-import PostCard from "@/components/PostCard";
 import { Post } from "@/types/post";
+import PostCardMain from "@/components/PostCardMain";
 
 
 export default async function Home({ searchParams }: { searchParams: { query?: string } }) {
@@ -34,7 +34,7 @@ export default async function Home({ searchParams }: { searchParams: { query?: s
 
         <ul className="mt-7 card_grid">
           {posts.length > 0 ? (
-            posts.map((post) => <PostCard key={post._id} post={post} />)
+            posts.map((post) => <PostCardMain key={post._id} post={post} />)
           ) : (
             <p className="no-results">No startups found</p>
           )}
