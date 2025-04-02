@@ -39,8 +39,8 @@ export default function PostDetails({ post}: { post: Post}) {
 
     return (
         <section className="section_container">
-            <img src={post.image} alt={post.title} className="w-full h-auto rounded-xl" />
-            <div className="space-y-5 mt-10 max-w-4xl mx-auto">
+            <img src={post.image} alt={post.title} className="w-full h-[80vh] rounded-xl" />
+            <div className="space-y-5 mt-10 max-w-7xl mx-auto">
                 <div className="flex-between gap-5">
                     <Link href={`/user/${post.user._id}`} className="flex gap-2 items-center mb-3">
                         <Image src={post.user.profilePicture} alt="avatar" width={64} height={64} className="rounded-full drop-shadow-lg" />
@@ -60,7 +60,7 @@ export default function PostDetails({ post}: { post: Post}) {
                 <h3 className="text-30-bold">Pitch Details</h3>
                 <article className="prose max-w-4xl font-work-sans break-all">{post.pitch}</article>
             </div>
-            <hr className="divider" />
+            <hr className="post_divider" />
 
             {/* Report Modal */}
             {isModalOpen && (
