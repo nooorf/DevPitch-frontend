@@ -43,11 +43,10 @@ const page = async ({ params }: { params: {id: string} }) => {
             <p className='mt-1 text-center text-14-normal'>{user?.bio}</p>
 
         </div>
-        <div className='flex-1 flex flex-col gap-5 lg:-mt-5'>
-            <p className='text-30-bold'>All Posts</p>
-            <ul className='card_grid-sm'>
-                    <UserProfile id={user._id}/>
-            </ul>
+        
+        <div >
+        <p className='text-30-bold w-full block mb-5'>All Posts</p>
+            <UserProfile id={user._id}/>
         </div>
     </section>
    </>

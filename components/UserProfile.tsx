@@ -13,7 +13,7 @@ const UserStartups = async ({ id }: { id: string }) => {
 
     return (
       <>
-        <ul>
+        <ul className="flex flex-wrap gap-5 ">
           {startups.length > 0 ? (
             startups.map((startup: any) => <PostCard key={startup._id} post={startup} />)
           ) : (
