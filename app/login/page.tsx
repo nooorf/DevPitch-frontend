@@ -75,8 +75,8 @@ const Login = () => {
   };
 
   return (
-    <div className="startup-card startup-form !max-w-sm !my-16">
-      <h1 className="heading rounded-xl">Login</h1>
+    <div className="login-card">
+      <h1 className="login-heading">Login</h1>
       {step === "email" ? (
         <form onSubmit={handleEmailSubmit} className="startup-form">
           <div>
