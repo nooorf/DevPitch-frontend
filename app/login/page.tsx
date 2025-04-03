@@ -75,7 +75,8 @@ const Login = () => {
   };
 
   return (
-    <div className="login-card">
+    <div className="flex justify-center items-center h-screen w-screen">
+    <div className="login-card lg:w-full max-w-md lg:max-w-2xl mx-2 sm:mx-4 md:mx-6">
       <h1 className="login-heading">Login</h1>
       {step === "email" ? (
         <form onSubmit={handleEmailSubmit} className="startup-form">
@@ -126,6 +127,7 @@ const Login = () => {
           Authorize through GitHub
         </a>
         </p>
+    </div>
     </div>
   );
 };
