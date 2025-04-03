@@ -99,6 +99,11 @@ const Login = () => {
             Send OTP
             <LogIn className="size-6 ml-2" />
           </Button>
+          <Button className="login-github text-white">
+              <a className="cursor-pointer" href="http://localhost:5000/auth/github">
+              GitHub Login
+              </a>
+        </Button>
         </form>
       ) : (
         <form onSubmit={handleOtpSubmit} className="startup-form">
@@ -122,11 +127,6 @@ const Login = () => {
           </Button>
         </form>
       )}
-
-        <p className="text-center"><a className="cursor-pointer" href="http://localhost:5000/auth/github">
-          Authorize through GitHub
-        </a>
-        </p>
     </div>
     </div>
   );

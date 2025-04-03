@@ -148,7 +148,7 @@
   }
 
   .login-card{
-    @apply bg-white border-[5px] border-black py-10 px-10 rounded-[22px] shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 !max-w-2xl mx-auto;
+    @apply bg-white border-[5px] border-black py-10 px-8 rounded-[22px] shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 !max-w-2xl mx-auto;
   }
 
   .startup-card-main{
@@ -213,6 +213,10 @@
 
   .startup-form_btn {
     @apply bg-primary border-[4px] border-black rounded-full p-5 min-h-[70px] w-full font-bold text-[18px] !important;
+  }
+
+  .login-github{
+    @apply bg-primary border-[4px] border-black rounded-full p-5 min-h-[70px] w-full max-w-2xl font-bold text-[18px] !important;
   }
 
   /* view */
