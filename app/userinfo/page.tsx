@@ -12,7 +12,7 @@ const UserInfo = () => {
   const [formData, setFormData] = useState({
     username: "",
     bio: "",
-    pfp: "", // Store Base64 string
+    pfp: "", 
   });
 
   const [error, setError] = useState<Record<string, string>>({});
@@ -82,9 +82,10 @@ const UserInfo = () => {
   };
 
   return (
-    
-    <form onSubmit={handleSubmit} className="startup-form border-4 border-black-200 p-4 rounded-lg !max-w-xl">
-      <h1 className="heading rounded-xl">User Info</h1>
+    <div className="flex justify-center items-center min-h-screen min-w-screen px-4 sm:px-6">
+    <div className="login-card max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl mx-auto p-4 sm:p-6 md:p-8 bg-white shadow-lg rounded-lg">
+    <form onSubmit={handleSubmit} className="startup-form">
+      <h1 className="login-heading">User Info</h1>
       <div>
         <label htmlFor="username" className="startup-form_label">Username</label>
         <Input id="username" name="username" className="startup-form_input" required value={formData.username} onChange={handleChange} />
@@ -107,7 +108,9 @@ const UserInfo = () => {
         {isSubmitting ? "Submitting..." : "Submit"}
       </Button>
     </form>
-  );
+    </div>
+    </div>
+    );
 };
 
 export default UserInfo;
