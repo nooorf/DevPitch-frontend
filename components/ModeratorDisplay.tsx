@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import PostCard from "./PostCard";
 import ModeratorPostCard from "./ModeratorPostCard";
 import { Post } from "@/types/post";
 
@@ -40,7 +39,7 @@ const ModeratorDisplay = () => {
 
   return (
     <>
-      <ul className="flex flex-wrap gap-5 ">
+      <ul className="flex flex-wrap justify-normal gap-5 items-center">
         {startups && startups.length > 0 ? (
           startups.map((startup) => <ModeratorPostCard  key={startup._id} post={startup} onPostUpdate={handlePostUpdate}/>)
         ) : (

@@ -32,7 +32,7 @@ export default async function Page ({ params }: { params: { id: string } }) {
         console.log("This is moderator profile in moderator page: ", moderator);
         if (!moderator) return notFound();
         return (
-            <section className="profile_container">
+            <div className="profile_container">
                 <div className="profile_card">
                     <div className="profile_title">
                         <h3 className="text-24-black uppercase text-center line-clamp-1">
@@ -53,7 +53,7 @@ export default async function Page ({ params }: { params: { id: string } }) {
                 <p className="text-30-bold">Reported Posts</p>
                 <ModeratorDisplay />
                 </div>
-            </section>
+            </div>
         );
 };
 

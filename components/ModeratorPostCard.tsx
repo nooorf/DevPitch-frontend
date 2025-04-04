@@ -46,7 +46,7 @@ export default function PostCard({ post, onPostUpdate }: { post: Post, onPostUpd
     }
   };
   return (
-    <li className="startup-card-moderator w-[calc(33.333%-0.625rem)] sm:w-[calc(50%-0.625rem)]  box-border">
+    <li className="startup-card-moderator group w-72">
       <div className="flex-between">
         <p className="startup_card_date">{post.createdAt ? formatDate(post.createdAt) : formatDate(new Date().toISOString())}</p>
         <div className="flex gap-1.5">
