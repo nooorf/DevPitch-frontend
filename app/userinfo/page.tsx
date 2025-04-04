@@ -88,20 +88,20 @@ const UserInfo = () => {
       <h1 className="login-heading">User Info</h1>
       <div>
         <label htmlFor="username" className="startup-form_label">Username</label>
-        <Input id="username" name="username" className="startup-form_input" required value={formData.username} onChange={handleChange} />
-        {error.username && <p className="startup-form_error">{error.username}</p>}
+        <Input id="username" name="username" className="startup-form_input" placeholder="Enter your username" value={formData.username} onChange={handleChange} />
+        {error.username && <p className="user-info_error">{error.username}</p>}
       </div>
 
       <div>
         <label htmlFor="bio" className="startup-form_label">Bio</label>
-        <Textarea id="bio" name="bio" className="startup-form_textarea" required placeholder="Describe yourself" value={formData.bio} onChange={handleChange} />
-        {error.bio && <p className="startup-form_error">{error.bio}</p>}
+        <Textarea id="bio" name="bio" className="startup-form_textarea" placeholder="Describe yourself" value={formData.bio} onChange={handleChange} />
+        {error.bio && <p className="user-info_error">{error.bio}</p>}
       </div>
 
       <div>
         <label htmlFor="pfp" className="startup-form_label">Profile Image </label>
         <input type="file" name="pfp" accept="image/*" onChange={handleChange} />
-        {error.pfp && <p className="startup-form_error">{error.pfp}</p>}
+        {error.pfp && <p className="user-info_error">{error.pfp}</p>}
       </div>
 
       <Button type="submit" className="startup-form_btn text-white" disabled={isSubmitting}>
