@@ -24,7 +24,7 @@ interface Post {
 export default function UserPost({ post }: { post: Post }) {
   console.log("Post received in PostCard: " , post);
   return (
-    <li className="startup-card group">
+    <li className="startup-card w-[calc(33.333%-0.625rem)] sm:w-[calc(50%-0.625rem)]  box-border group">
       <div className="flex-between">
         <p className="startup_card_date">{post.createdAt ? formatDate(post.createdAt) : formatDate(new Date().toISOString())}</p>
         <div className="flex gap-1.5">
@@ -53,7 +53,6 @@ export default function UserPost({ post }: { post: Post }) {
           />
         </Link>
       </div>
-
       <Link href={`/startup/${post._id}`}>
         <p className="startup-card_desc">{post.description}</p>
         <img src={post.image} className="startup-card_img" />

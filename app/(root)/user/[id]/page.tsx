@@ -46,7 +46,7 @@ const page = async ({ params }: { params: {id: string} }) => {
         
         <div >
         <p className='text-30-bold w-full block mb-5'>All Posts</p>
-            <UserProfile id={user._id}/>
+        <UserProfile id={user._id}/>
         </div>
     </section>
    </>

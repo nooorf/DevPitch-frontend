@@ -45,9 +45,8 @@ export default function PostCard({ post, onPostUpdate }: { post: Post, onPostUpd
       console.error("Error updating item:", error);
     }
   };
-
   return (
-    <li className="startup-card-moderator group">
+    <li className="startup-card-moderator w-[calc(33.333%-0.625rem)] sm:w-[calc(50%-0.625rem)]  box-border">
       <div className="flex-between">
         <p className="startup_card_date">{post.createdAt ? formatDate(post.createdAt) : formatDate(new Date().toISOString())}</p>
         <div className="flex gap-1.5">

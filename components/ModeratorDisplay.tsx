@@ -40,7 +40,7 @@ const ModeratorDisplay = () => {
 
   return (
     <>
-      <ul>
+      <ul className="flex flex-wrap gap-5 ">
         {startups && startups.length > 0 ? (
           startups.map((startup) => <ModeratorPostCard  key={startup._id} post={startup} onPostUpdate={handlePostUpdate}/>)
         ) : (
