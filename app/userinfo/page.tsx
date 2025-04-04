@@ -84,22 +84,22 @@ const UserInfo = () => {
   return (
     <div className="flex justify-center items-center min-h-screen min-w-screen px-4 sm:px-6">
     <div className="login-card max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-2xl mx-auto p-4 sm:p-6 md:p-8 bg-white shadow-lg rounded-lg">
-    <form onSubmit={handleSubmit} className="startup-form">
+    <form onSubmit={handleSubmit} className="login-form">
       <h1 className="login-heading">User Info</h1>
       <div>
-        <label htmlFor="username" className="startup-form_label">Username</label>
-        <Input id="username" name="username" className="startup-form_input" placeholder="Enter your username" value={formData.username} onChange={handleChange} />
+        <label htmlFor="username" className="login-form_label">Username</label>
+        <Input id="username" name="username" className="login-form_input" placeholder="Enter your username" value={formData.username} onChange={handleChange} />
         {error.username && <p className="user-info_error">{error.username}</p>}
       </div>
 
       <div>
-        <label htmlFor="bio" className="startup-form_label">Bio</label>
-        <Textarea id="bio" name="bio" className="startup-form_textarea" placeholder="Describe yourself" value={formData.bio} onChange={handleChange} />
+        <label htmlFor="bio" className="login-form_label">Bio</label>
+        <Textarea id="bio" name="bio" className="login-form_textarea" placeholder="Describe yourself" value={formData.bio} onChange={handleChange} />
         {error.bio && <p className="user-info_error">{error.bio}</p>}
       </div>
 
       <div>
-        <label htmlFor="pfp" className="startup-form_label">Profile Image </label>
+        <label htmlFor="pfp" className="login-form_label">Profile Image </label>
         <input type="file" name="pfp" accept="image/*" onChange={handleChange} />
         {error.pfp && <p className="user-info_error">{error.pfp}</p>}
       </div>
