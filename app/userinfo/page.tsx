@@ -75,7 +75,8 @@ const UserInfo = () => {
         router.push("/");
       }
     } catch (error) {
-      toast.error(error.message || "Something went wrong");
+      const errorMessage = error instanceof Error ? error.message : "Something went wrong";
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
