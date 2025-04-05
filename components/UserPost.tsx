@@ -59,11 +59,11 @@ export default function UserPost({ post }: { post: Post }) {
         <img src={post.image} className="startup-card_img" />
       </Link>
 
-      <div className="flex-between mt-5">
+      <div className="flex-between mt-5 gap-2">
         <Link href={`/query=${post.category?.toLowerCase()}`}>
           <p className="text-16-medium">{post.category}</p>
         </Link>
-        <div id="edit_details" className="flex gap-2">
+        <div id="edit_details" className="flex gap-1">
         <Link href={`/startup/edit/${post._id}`}>
           <button className="startup-card_btn">Edit</button>
         </Link>

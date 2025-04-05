@@ -7,7 +7,7 @@ import { formatDate } from "@/lib/utils";
 import ReportNumber from "./ReportNumber";
 import { Post } from "@/types/post";
 
-export default function PostCard({ post, onPostUpdate }: { post: Post, onPostUpdate: (postId: string) => void }) {
+export default function ModeratorPostCard({ post, onPostUpdate }: { post: Post, onPostUpdate: (postId: string) => void }) {
   console.log("Post received in PostCard: " , post);
 
   const handleDelete = async () => {
@@ -47,7 +47,7 @@ export default function PostCard({ post, onPostUpdate }: { post: Post, onPostUpd
   };
 
   return (
-    <li className="startup-card-moderator group">
+    <li className="startup-card group">
       <div className="flex-between">
         <p className="startup_card_date">{post.createdAt ? formatDate(post.createdAt) : formatDate(new Date().toISOString())}</p>
         <div className="flex gap-1.5">
