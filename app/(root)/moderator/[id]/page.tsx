@@ -39,21 +39,22 @@ export default async function Page ({ params }: { params: { id: string } }) {
                             {moderator.name}
                         </h3>
                     </div>
-                    <Image
-                        src={moderator.profilePicture || "/default-avatar.png"}
-                        alt={moderator.name}
-                        width={220}
-                        height={220}
-                        className="profile_image"
+                    <Image src={moderator.profilePicture || "default-avatar.png"}  
+                            alt={moderator.name} 
+                            width={220} 
+                            height={220} 
+                            className="profile_image"
                     />
-                    <p className="text-30-extrabold mt-7 text-center">@{moderator.githubUsername}</p>
-                    <p className="mt-1 text-center text-14-normal">{moderator.bio}</p>
+                    <p className='text-30-extrabold mt-7 text-center'>@{moderator?.githubUsername}</p>
+                    <p className='mt-1 text-center text-14-normal'>{moderator?.bio}</p>
+        
                 </div>
                 <div>
                 <p className="text-30-bold w-full block mb-5">Reported Posts</p>
                     <ModeratorDisplay />
                 </div>
             </section>
+           </>
         );
 };
 

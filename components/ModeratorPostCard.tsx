@@ -45,7 +45,6 @@ export default function ModeratorPostCard({ post, onPostUpdate }: { post: Post, 
       console.error("Error updating item:", error);
     }
   };
-
   return (
     <li className="startup-card group">
       <div className="flex-between">
@@ -82,7 +81,7 @@ export default function ModeratorPostCard({ post, onPostUpdate }: { post: Post, 
         <img src={post.image} className="startup-card_img" />
       </Link>
 
-      <div className="flex-between gap-3 mt-5">
+      <div className="flex-between gap-2 mt-5">
         <Link href={`/query=${post.category?.toLowerCase()}`}>
           <p className="text-16-medium">{post.category}</p>
         </Link>
@@ -91,15 +90,15 @@ export default function ModeratorPostCard({ post, onPostUpdate }: { post: Post, 
         </Link>
       </div>
       <div className="flex-between mt-5">
-      <div className="flex gap-2 mt-5">
-      <a href="#">
-          <button onClick={handleDelete} className="startup-card_btn-moderator_remove "><X/></button>
-       </a>
-        <a href="#">
-          <button onClick={handleKeep} className="startup-card_btn-moderator_keep"><Check/></button>
-        </a>
-      </div>
-      <ReportNumber reportCount={post.reportCount} />
+        <div className="flex gap-2 mt-5">
+          <a href="#">
+            <button onClick={handleDelete} className="startup-card_btn-moderator_remove "><X/></button>
+          </a>
+          <a href="#">
+            <button onClick={handleKeep} className="startup-card_btn-moderator_keep"><Check/></button>
+          </a>
+        </div>
+        <ReportNumber reportCount={post.reportCount} />
       </div>
       
     </li>

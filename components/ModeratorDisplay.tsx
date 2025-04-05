@@ -31,6 +31,7 @@ const ModeratorDisplay = () => {
         setError((err as Error).message);
       }
     };
+    
 
     fetchPosts();
   }, []);
@@ -47,6 +48,7 @@ const ModeratorDisplay = () => {
         )}
       </ul>
     </>
+
   );
 };
 
