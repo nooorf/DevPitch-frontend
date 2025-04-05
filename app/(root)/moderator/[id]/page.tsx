@@ -32,28 +32,31 @@ export default async function Page ({ params }: { params: { id: string } }) {
         console.log("This is moderator profile in moderator page: ", moderator);
         if (!moderator) return notFound();
         return (
-            <div className="profile_container">
-                <div className="profile_card">
-                    <div className="profile_title">
-                        <h3 className="text-24-black uppercase text-center line-clamp-1">
+            <>
+            <section className='profile_container'>
+                <div className='profile_card'>
+                    <div className='profile_title'>
+                        <h3 className='text-24-black uppercase text-center line-clamp-1'>
                             {moderator.name}
                         </h3>
                     </div>
-                    <Image
-                        src={moderator.profilePicture || "/default-avatar.png"}
-                        alt={moderator.name}
-                        width={220}
-                        height={220}
-                        className="profile_image"
+                    <Image src={moderator.profilePicture || "default-avatar.png"}  
+                            alt={moderator.name} 
+                            width={220} 
+                            height={220} 
+                            className="profile_image"
                     />
-                    <p className="text-30-extrabold mt-7 text-center">@{moderator.githubUsername}</p>
-                    <p className="mt-1 text-center text-14-normal">{moderator.bio}</p>
+                    <p className='text-30-extrabold mt-7 text-center'>@{moderator?.githubUsername}</p>
+                    <p className='mt-1 text-center text-14-normal'>{moderator?.bio}</p>
+        
                 </div>
+                
                 <div>
-                <p className="text-30-bold">Reported Posts</p>
-                <ModeratorDisplay />
+                <p className='text-30-bold w-full block mb-5'>All Posts</p>
+                    <ModeratorDisplay />
                 </div>
-            </div>
+            </section>
+           </>
         );
 };
 

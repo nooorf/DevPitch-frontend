@@ -26,7 +26,7 @@ const page = async ({ params }: { params: {id: string} }) => {
   return (
    <>
     <section className='profile_container'>
-        <div className='profile_card'>
+        <div className='profile_card w-1/3'>
             <div className='profile_title'>
                 <h3 className='text-24-black uppercase text-center line-clamp-1'>
                     {user.name}
