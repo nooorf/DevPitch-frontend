@@ -28,7 +28,7 @@ const page = async ({ params }: { params: {id: string} }) => {
     <section className='profile_container'>
         <div className='profile_card w-1/3'>
             <div className='profile_title'>
-                <h3 className='text-24-black uppercase text-center line-clamp-1'>
+                <h3 className='text-20-black uppercase font-bold text-center line-clamp-1'>
                     {user.name}
                 </h3>
             </div>

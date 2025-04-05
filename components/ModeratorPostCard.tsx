@@ -7,7 +7,7 @@ import { formatDate } from "@/lib/utils";
 import ReportNumber from "./ReportNumber";
 import { Post } from "@/types/post";
 
-export default function PostCard({ post, onPostUpdate }: { post: Post, onPostUpdate: (postId: string) => void }) {
+export default function ModeratorPostCard({ post, onPostUpdate }: { post: Post, onPostUpdate: (postId: string) => void }) {
   console.log("Post received in PostCard: " , post);
 
   const handleDelete = async () => {

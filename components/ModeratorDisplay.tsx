@@ -40,15 +40,15 @@ const ModeratorDisplay = () => {
 
   return (
     <>
-        <ul className="flex flex-wrap gap-5 ">
-          {startups && startups.length > 0 ? (
-            startups.map((startup: any) => <ModeratorPostCard  key={startup._id} post={startup} onPostUpdate={handlePostUpdate}/>
-          )
-          ) : (
-            <p>No posts created yet</p>
-          )}
-        </ul>
-      </>
+      <ul className="flex flex-wrap gap-5 ">
+        {startups && startups.length > 0 ? (
+          startups.map((startup) => <ModeratorPostCard  key={startup._id} post={startup} onPostUpdate={handlePostUpdate}/>)
+        ) : (
+          <p>No posts have been reported yet</p>
+        )}
+      </ul>
+    </>
+
   );
 };
 
