@@ -5,6 +5,7 @@ import Image from "next/image";
 import { FlagIcon, X } from "lucide-react";
 import useAuth from "@/hooks/useAuth";
 import { Post } from "@/types/post";
+import {toast} from "sonner";
 
 export default function PostDetails({ post }: { post: Post }) {
     const { user, loading } = useAuth();
@@ -71,10 +72,10 @@ export default function PostDetails({ post }: { post: Post }) {
             const data = await res.json();
             if (!res.ok) throw new Error(data.message || "Failed to collaborate on post");
 
-            alert("Collaboration request sent successfully!");
+            toast.success("Collaboration request sent successfully!");
             setIsCollaborateOpen(false);
         } catch (error: any) {
-            alert(error.message);
+            toast.error(error.message);
         }
     };
 

@@ -11,7 +11,6 @@ type CollaborationModel = {
   expertise: string;
   linkedin?: string;
   description: string;
-  status:string;
   postId: {
     _id: string;
     title: string;
@@ -54,14 +53,14 @@ export default function RequestsPage() {
   const renderRequestCard = (request: CollaborationModel) => (
     <div
       key={request._id}
-      className="border rounded-lg p-4 shadow-sm mb-4 bg-white hover:shadow-md transition-shadow"
+      className="request-card"
     >
       {activeTab === "sent" ? (
         <h3 className="text-lg font-semibold">
           Sent to:{" "}
           <Link
             href={`/startup/${request.postId._id}`}
-            className="text-blue-600 underline"
+            className="no-underline"
           >
             {request.postId.title}
           </Link>
@@ -73,6 +72,15 @@ export default function RequestsPage() {
           </h3>
           <p>
             <strong>Email:</strong> {request.userId?.email || "N/A"}
+          </p>
+          <p className="mt-2">
+            <strong>Post:</strong>{" "}
+            <Link
+              href={`/startup/${request.postId._id}`}
+              className="no-underline"
+            >
+              {request.postId.title}
+            </Link>
           </p>
         </>
       )}
@@ -87,7 +95,7 @@ export default function RequestsPage() {
           <strong>LinkedIn:</strong>{" "}
           <a
             href={request.linkedin}
-            className="text-blue-600"
+            className="text-blue-600 no-underline hover:underline"
             target="_blank"
             rel="noreferrer"
           >
@@ -98,7 +106,6 @@ export default function RequestsPage() {
       <p className="mt-2">
         <strong>Description:</strong> {request.description}
       </p>
-      <p><strong>Status:</strong> {request.status}</p>
     </div>
   );
 
@@ -125,13 +132,15 @@ export default function RequestsPage() {
       </div>
 
       {loading ? (
-        <div className="flex items-center justify-center mt-10 text-gray-600">
+        <div className="flex flex-col gap-2 items-center justify-center mt-10 text-gray-600 ">
           <Loader2 className="animate-spin mr-2" /> Loading...
         </div>
       ) : currentRequests.length === 0 ? (
         <p className="text-gray-600">No {activeTab} requests found.</p>
       ) : (
-        <div>{currentRequests.map(renderRequestCard)}</div>
+        <div className="flex flex-col gap-y-6">
+          {currentRequests.map(renderRequestCard)}
+        </div>
       )}
     </section>
   );
