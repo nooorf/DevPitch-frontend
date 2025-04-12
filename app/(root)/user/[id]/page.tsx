@@ -40,8 +40,8 @@ const page = async ({ params }: { params: {id: string} }) => {
             />
             <p className='text-30-extrabold mt-7 text-center'>@{user?.githubUsername}</p>
             <p className='mt-1 text-center text-14-normal'>{user?.bio}</p>
-
         </div>
+        
         
         <div >
         <p className='text-30-bold w-full block mb-5'>All Posts</p>

@@ -68,6 +68,11 @@ const Navbar = () => {
                   <BadgePlus className="size-6 sm:hidden" />
                 </Link>
 
+                <Link href="/user/requests">
+                  <span className="max-sm:hidden">Requests</span>
+                  <BadgePlus className="size-6 sm:hidden" />
+                </Link>
+
                 <a href="http://localhost:5000/auth/logout">
                   <LogOut className="cursor-pointer" />
                 </a>
