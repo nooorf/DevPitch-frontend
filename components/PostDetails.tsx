@@ -80,8 +80,7 @@ export default function PostDetails({ post }: { post: Post }) {
     };
 
     return (
-        <section className="section_container">
-            <img src={post.image} alt={post.title} className="w-full h-[80vh] rounded-xl" />
+        <section className="section_container !pt-0">
             <div className="space-y-5 mt-10 max-w-7xl mx-auto">
                 <div className="flex-between gap-5">
                     <Link href={`/user/${post.user._id}`} className="flex gap-2 items-center mb-3">
@@ -93,7 +92,7 @@ export default function PostDetails({ post }: { post: Post }) {
                     </Link>
                     <div className="flex gap-3.5">
                         <p className="category-tag">{post.category}</p>
-                        <button className="startup-form-btn !bg-primary-100 !p-2 !rounded-full" onClick={() => setIsCollaborateOpen(true)}>
+                        <button className="startup-form-btn !bg-primary-100 !p-2 !rounded-full !font-medium !text-[16px]" onClick={() => setIsCollaborateOpen(true)}>
                         Collaborate
                     </button>
                         <div
@@ -106,7 +105,18 @@ export default function PostDetails({ post }: { post: Post }) {
                     </div>
                 </div>
                 <h3 className="text-30-bold">Pitch Details</h3>
-                    <article className="prose max-w-4xl font-work-sans break-all">{post.pitch}</article>
+                <div className="flex gap-8 items-center justify-center">
+                    <article className="prose max-w-2xl font-work-sans break-all flex-1">
+                        {post.pitch}
+                    </article>
+                    <div className="w-[400px] flex-shrink-0">
+                        <img 
+                            src={post.image} 
+                            alt="Post Image" 
+                            className="w-full h-auto rounded-lg object-cover mx-10"
+                        />
+                    </div>
+                </div>
             </div>
 
             <hr className="post_divider" />
@@ -131,8 +141,6 @@ export default function PostDetails({ post }: { post: Post }) {
                     </div>
                 </div>
             )}
-
-            Collaborate Modal
             {iscollaborateOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                     <div className="bg-white p-5 rounded-lg shadow-lg w-[400px] relative">
@@ -195,7 +203,7 @@ export default function PostDetails({ post }: { post: Post }) {
                                 </button>
                                 <button
                                     type="submit"
-                                    className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                                    className="startup-card-btn !bg-primary-100 !p-2 !font-medium !text-[16px]"
                                 >
                                     Submit
                                 </button>

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { LogIn, LogOut, BadgePlus, ShieldCheck } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
-import logo from "../public/logo.png";
+import logo from "../public/logo2.svg";
 
 
 type User = {
@@ -45,9 +45,9 @@ const Navbar = () => {
 
   return (
     <header className="px-5 py-3 shadow-sm bg-white font-work-sans">
-      <nav className="flex justify-between items-center">
+      <nav className="flex justify-between items-center navbar">
         <Link href="/">
-          <Image src={logo} width={130} height={35} alt="logo" />
+          <Image src={logo} height={60} alt="logo" />
         </Link>
         <div className="flex items-center gap-5 text-black">
           {user ? (

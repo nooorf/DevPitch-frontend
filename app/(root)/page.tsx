@@ -1,6 +1,7 @@
 import SearchForm from "@/components/SearchForm";
 import { Post } from "@/types/post";
 import PostCardMain from "@/components/PostCardMain";
+import land from "@/./public/land.svg";
 
 
 export default async function Home({ searchParams }: { searchParams: { query?: string } }) {
@@ -25,7 +26,7 @@ export default async function Home({ searchParams }: { searchParams: { query?: s
         <h1 className="heading">
           Pitch Your Startup, <br /> Connect With Tech Fellows
         </h1>
-        <p className="sub-heading !max-w-3xl">Submit Ideas, Get noticed!</p>
+        <p className="sub-heading !max-w-3xl !text-black !font-bold">Submit Ideas, Get noticed!</p>
         <SearchForm query={query} />
       </section>
 
