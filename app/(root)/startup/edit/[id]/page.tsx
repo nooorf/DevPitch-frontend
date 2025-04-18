@@ -26,7 +26,7 @@ export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <section className='pink_container !min-h-[230px]'>
+      <section className='pink_container !min-h-[230px] pink_container-alt'>
         <h1 className='heading'>Edit Post</h1>
       </section>
       <EditForm post={post} />

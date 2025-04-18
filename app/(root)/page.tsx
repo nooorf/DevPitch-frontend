@@ -1,7 +1,7 @@
 import SearchForm from "@/components/SearchForm";
 import { Post } from "@/types/post";
 import PostCardMain from "@/components/PostCardMain";
-import land from "@/./public/land.svg";
+import land from "@/./public/land2.svg";
 
 
 export default async function Home({ searchParams }: { searchParams: { query?: string } }) {
@@ -22,12 +22,16 @@ export default async function Home({ searchParams }: { searchParams: { query?: s
 
   return (
     <>
-      <section className="pink_container">
-        <h1 className="heading">
+      <section className="pink_container !items-start !justify-start !gap-0 px-20">
+        <h1 className="text-[48px] font-extrabold text-black leading-tight mb-4 text-left max-w-2xl">
           Pitch Your Startup, <br /> Connect With Tech Fellows
         </h1>
-        <p className="sub-heading !max-w-3xl !text-black !font-bold">Submit Ideas, Get noticed!</p>
-        <SearchForm query={query} />
+        <p className="!text-black !font-bold text-xl mb-8 text-left max-w-xl">
+          Submit Ideas, Get noticed!
+        </p>
+        <div className="w-full max-w-xl">
+          <SearchForm query={query} />
+        </div>
       </section>
 
       <section className="section_container">

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { LogIn, LogOut, BadgePlus, ShieldCheck } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
-import logo from "../public/logo2.svg";
+import logo from "../public/logof.svg";
 
 
 type User = {

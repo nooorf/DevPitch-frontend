@@ -32,7 +32,7 @@ const page = () => {
   if (!isAuthenticated) return null
   return (
     <>
-        <section className='pink_container !min-h-[230px]'>
+        <section className='pink-container !min-h-[230px] pink_container-alt'>
             <h1 className='heading'>Submit Your Startup Pitch!</h1>
         </section>
         <StartupForm />
