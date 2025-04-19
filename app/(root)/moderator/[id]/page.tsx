@@ -2,12 +2,6 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import ModeratorDisplay from '@/components/ModeratorDisplay';
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
 interface Moderator {
   _id: string;
   name: string;
@@ -30,7 +24,8 @@ const getUser = async (id: string): Promise<Moderator | null> => {
   }
 };
 
-export default async function Page({ params }: PageProps) {
+// No need to manually type PageProps, it will be inferred by Next.js
+export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
   if (!id) return notFound();
 
