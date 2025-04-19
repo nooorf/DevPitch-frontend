@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import EditForm from "@/components/EditForm";
 import { Post } from "@/types/post";
@@ -20,7 +21,7 @@ export default function Page({ params }: { params: { id: string } }) {
     };
 
     fetchPost();
-  }, [params.id]);
+  });
 
   return (
     <>
