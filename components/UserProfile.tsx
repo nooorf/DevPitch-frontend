@@ -4,7 +4,7 @@ import { Post } from "@/types/post";
 
 const UserStartups = async ({ id }: { id: string }) => {
   try {
-    const res = await fetch(`http://localhost:5000/users/${id}/posts`, {
+    const res = await fetch(`http://localhost:3000/users/${id}/posts`, {
       cache: "no-store", 
     });
 

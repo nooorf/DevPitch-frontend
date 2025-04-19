@@ -37,7 +37,7 @@ export default function PostDetails({ post }: { post: Post }) {
       return;
     }
     try {
-      const res = await fetch(`http://localhost:5000/posts/${post._id}/report`, {
+      const res = await fetch(`http://localhost:3000/posts/${post._id}/report`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -67,7 +67,7 @@ export default function PostDetails({ post }: { post: Post }) {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/posts/${post._id}/collaborate`, {
+      const res = await fetch(`http://localhost:3000/posts/${post._id}/collaborate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -32,7 +32,7 @@ export default function RequestsPage() {
       setLoading(true);
       try {
         const endpoint =
-          "http://localhost:5000/collaborations/request/" + activeTab;
+          "http://localhost:3000/collaborations/request/"+ activeTab;
         const res = await fetch(endpoint, { credentials: "include" });
         const data = await res.json();
         if (activeTab === "sent") {
