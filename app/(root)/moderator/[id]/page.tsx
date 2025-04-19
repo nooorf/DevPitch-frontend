@@ -15,7 +15,7 @@ interface Moderator {
 
 const getUser = async (id: string): Promise<Moderator | null> => {
     try {
-        const res = await fetch(`http://localhost:5000/users/${id}`, { cache: "no-store"});
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/${id}`, { cache: "no-store"});
         if (!res.ok) throw new Error("Failed to fetch user");
         return res.json();
     } catch (error) {

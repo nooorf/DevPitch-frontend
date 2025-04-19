@@ -13,7 +13,7 @@ const View = ({ id }: { id: string }) => {
   useEffect(() => {
     const incrementViews = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/posts/views/${id}`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/posts/views/${id}`);
 
         if (!response.ok) {
           throw new Error("Failed to update views");
