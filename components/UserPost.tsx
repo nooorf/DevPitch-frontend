@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { EyeIcon } from "lucide-react";
 import { formatDate } from "@/lib/utils"; 
+import { toast } from "sonner";
 
 
 interface Post {
@@ -22,6 +23,30 @@ interface Post {
 }
 
 export default function UserPost({ post }: { post: Post }) {
+
+  const handleDelete = async () => {  
+    try {
+      const response = await fetch(`http://localhost:5000/posts/${post._id}/delete`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", 
+      });
+
+      if (response.ok) {
+        toast.success("Post deleted successfully");
+        window.location.reload();
+      } else {
+        const data = await response.json();
+        toast.error(data.message || "Failed to delete post");
+      }
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      toast.error("Failed to delete post");
+    }
+  }
+
   console.log("Post received in PostCard: " , post);
   return (
     <li className="startup-card group">
@@ -67,9 +92,7 @@ export default function UserPost({ post }: { post: Post }) {
         <Link href={`/startup/edit/${post._id}`}>
           <button className="startup-card_btn">Edit</button>
         </Link>
-        <Link href={`/startup/${post._id}`}>
-          <button className="startup-card_btn">Details</button>
-        </Link>
+          <button className="startup-card_btn" onClick={handleDelete}>Delete</button>
         </div>
       </div>
     </li>
