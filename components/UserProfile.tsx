@@ -1,5 +1,6 @@
 import React from "react";
 import UserPosts from "./UserPost";
+import { Post } from "@/types/post";
 
 const UserStartups = async ({ id }: { id: string }) => {
   try {
@@ -15,7 +16,7 @@ const UserStartups = async ({ id }: { id: string }) => {
       <>
         <ul className="flex flex-wrap gap-5 ">
           {startups.length > 0 ? (
-            startups.map((startup: any) => <UserPosts key={startup._id} post={startup} />
+            startups.map((startup: Post) => <UserPosts key={startup._id} post={startup} />
           )
           ) : (
             <p>No posts created yet</p>

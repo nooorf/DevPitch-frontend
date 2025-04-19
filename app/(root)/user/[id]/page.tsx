@@ -19,7 +19,7 @@ const getUser = async (id: string): Promise<User | null> => {
         return null;
     }
 }
-const page = async ({ params }: { params: {id: string} }) => {
+const Page = async ({ params }: { params: {id: string} }) => {
     const user = await getUser(params.id);
 
     if(!user) {return <p className='text-red-500'>User not found</p>}
@@ -52,4 +52,4 @@ const page = async ({ params }: { params: {id: string} }) => {
   )
 }
 
-export default page
+export default Page

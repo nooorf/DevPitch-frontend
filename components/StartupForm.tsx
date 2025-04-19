@@ -43,7 +43,7 @@ const StartupForm = () => {
     }
   
     try {
-      const response = await fetch('http://localhost:5000/posts/create', {
+      const response = await fetch("http://localhost:5000/posts/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,8 +58,12 @@ const StartupForm = () => {
   
       toast.success("Your post has been created!");
       router.push("/");
-    } catch (error: any) {
-      toast.error(error.message || "Something went wrong");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message || "Something went wrong");
+      } else {
+        toast.error("An unknown error occurred");
+      }
     } finally {
       setIsSubmitting(false);
     }
