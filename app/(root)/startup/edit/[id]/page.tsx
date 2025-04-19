@@ -21,7 +21,7 @@ export default function Page({ params }: { params: { id: string } }) {
     };
 
     fetchPost();
-  });
+  }, [params.id]);
 
   return (
     <>
