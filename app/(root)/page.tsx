@@ -1,7 +1,6 @@
 import SearchForm from "@/components/SearchForm";
 import { Post } from "@/types/post";
 import PostCardMain from "@/components/PostCardMain";
-import land from "@/./public/land2.svg";
 
 
 export default async function Home({ searchParams }: { searchParams: { query?: string } }) {

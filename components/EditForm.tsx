@@ -7,18 +7,9 @@ import { Button } from "./ui/button";
 import { Send } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter, useParams } from "next/navigation";
+import { Post } from "@/types/post";
 
-interface Post {
-  _id: string;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  pitch: string;
-  githubRepo: string;
-}
-
-export default function EditForm() {
+export default function EditForm({ post }: { post: Post | null }) {
   const [formData, setFormData] = useState<Post | null>(null);
   const [error, setError] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import EditForm from '@/components/EditForm'
 import { useRouter } from 'next/navigation'
+import { Post } from '@/types/post'
 
 export default function Page({ params }: { params: { id: string } }) {
   const router = useRouter()

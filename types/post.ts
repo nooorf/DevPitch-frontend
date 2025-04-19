@@ -1,18 +1,20 @@
 export interface Post {
     _id: string;
     title: string;
+    slug: string;
     description: string;
     category: string;
-    link: string;
+    githubRepo: string;
     image: string;
-    views: number;
-    createdAt: string;
+    pitch: string;
     user: {
         _id: string;
         name: string;
         profilePicture: string;
         githubUsername: string;
     };
+    tags: string[];
+    views: number;
     reportCount: number;
-    pitch: string;
+    createdAt: string;
 }
