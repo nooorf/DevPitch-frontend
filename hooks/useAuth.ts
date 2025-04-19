@@ -13,7 +13,7 @@ export default function useAuth() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch("http://localhost:5000/auth/me", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/me`, {
           credentials: "include", 
         });
 
