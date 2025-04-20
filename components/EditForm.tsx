@@ -1,33 +1,62 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { Send } from "lucide-react";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { Post } from "@/types/post";
+import { useRouter, useParams } from "next/navigation";
 
-export default function EditForm({ post }: { post: Post }) {
-  const [formData, setFormData] = useState<Post>(post);
+interface Post {
+  _id: string;
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+  pitch: string;
+  githubRepo: string;
+}
+
+export default function EditForm() {
+  const [formData, setFormData] = useState<Post | null>(null);
   const [error, setError] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const params = useParams();
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  useEffect(() => {
+    if (params?.id) {
+      fetchPost();
+    }
+  }, [params]);
+
+  const fetchPost = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/posts/${params.id}`);
+      const post = await response.json();
+      setFormData(post);
+    } catch (error) {
+      console.error("Failed to fetch post:", error);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (formData) {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData) return;
+
     setIsSubmitting(true);
     setError({});
 
     const errors: Record<string, string> = {};
-    const requiredFields: (keyof Post)[] = ["title", "description", "category", "pitch"];
 
+    const requiredFields: (keyof Post)[] = ["title", "description", "category", "pitch"];
     requiredFields.forEach((field) => {
       const value = formData[field];
       if (typeof value !== "string" || !value.trim()) {
@@ -42,31 +71,31 @@ export default function EditForm({ post }: { post: Post }) {
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:5000/posts/${formData._id}/edit`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          credentials: "include",
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`http://localhost:5000/posts/${formData._id}/edit`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(formData),
+      });
 
       const result = await response.json();
+
       if (!response.ok) throw new Error(result.message || "Failed to update post");
 
       toast.success("Your post has been updated!");
       router.push("/");
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error("Something went wrong");
-      }
+    } catch (error: any) {
+      toast.error(error.message || "Something went wrong");
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (!formData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <form onSubmit={handleSubmit} className="startup-form">

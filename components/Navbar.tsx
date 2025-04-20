@@ -23,7 +23,7 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await fetch("http://localhost:3000/auth/me", {
+        const res = await fetch("http://localhost:5000/auth/me", {
           credentials: "include", 
           cache: "no-store",
         });
@@ -57,7 +57,7 @@ const Navbar = () => {
                   <ShieldCheck className="size-6" />
                   <span className="max-sm:hidden">Moderator</span>
                 </Link>
-                <a href="http://localhost:3000/auth/logout">
+                <a href="http://localhost:5000/auth/logout">
                   <LogOut className="cursor-pointer" />
                 </a>
               </>
@@ -73,7 +73,7 @@ const Navbar = () => {
                   <BadgePlus className="size-6 sm:hidden" />
                 </Link>
 
-                <a href="http://localhost:3000/auth/logout">
+                <a href="http://localhost:5000/auth/logout">
                   <LogOut className="cursor-pointer" />
                 </a>
                 <Link href={`/user/${user._id}`}>
@@ -86,7 +86,7 @@ const Navbar = () => {
             )
             
           ) : (
-            <a href="http://localhost:3000/auth/github">
+            <a href="http://localhost:5000/auth/github">
                <LogIn className="cursor-pointer" />
              </a>
           )}

@@ -26,7 +26,7 @@ export default function UserPost({ post }: { post: Post }) {
 
   const handleDelete = async () => {  
     try {
-      const response = await fetch("http://localhost:3000/posts/${post._id}/delete", {
+      const response = await fetch(`http://localhost:5000/posts/${post._id}/delete`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

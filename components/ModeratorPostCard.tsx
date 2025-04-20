@@ -12,7 +12,7 @@ export default function ModeratorPostCard({ post, onPostUpdate }: { post: Post, 
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/posts/${post._id}`, {
+      const response = await fetch(`http://localhost:5000/posts/${post._id}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -30,7 +30,7 @@ export default function ModeratorPostCard({ post, onPostUpdate }: { post: Post, 
 
   const handleKeep = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/posts/${post._id}`, {
+      const response = await fetch(`http://localhost:5000/posts/${post._id}`, {
         method: "PUT",
         credentials: "include",
       });

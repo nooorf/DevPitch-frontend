@@ -11,7 +11,7 @@ interface User {
 }
 const getUser = async (id: string): Promise<User | null> => {
     try {
-        const res = await fetch(`http://localhost:3000/users/${id}`, { cache: "no-store" });
+        const res = await fetch(`http://localhost:5000/users/${id}`, { cache: "no-store" });
         if (!res.ok) throw new Error("Failed to fetch user");
         return res.json();
     } catch (error) {
@@ -19,14 +19,14 @@ const getUser = async (id: string): Promise<User | null> => {
         return null;
     }
 }
-const Page = async ({ params }: { params: {id: string} }) => {
+const page = async ({ params }: { params: {id: string} }) => {
     const user = await getUser(params.id);
 
     if(!user) {return <p className='text-red-500'>User not found</p>}
   return (
    <>
     <section className='profile_container'>
-        <div className='profile_card w-1/3 !bg-[#C83467]'>
+        <div className='profile_card w-1/3 !bg-[#CC376B]'>
             <div className='profile_title'>
                 <h3 className='text-20-black uppercase font-bold text-center line-clamp-1'>
                     {user.name}
@@ -52,4 +52,4 @@ const Page = async ({ params }: { params: {id: string} }) => {
   )
 }
 
-export default Page
+export default page

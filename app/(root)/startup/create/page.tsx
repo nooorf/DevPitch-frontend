@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import StartupForm from '@/components/StartupForm'
 import { useRouter } from 'next/navigation'
 
-const Page = () => {
+const page = () => {
     const router = useRouter()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
 
@@ -27,7 +27,7 @@ const Page = () => {
     
     checkAuth()
   
-  }, [router])
+  }, [])
 
   if (!isAuthenticated) return null
   return (
@@ -40,4 +40,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default page

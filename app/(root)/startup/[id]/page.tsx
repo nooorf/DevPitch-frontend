@@ -1,6 +1,7 @@
 
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { formatDate } from "@/lib/utils";
 import View from "@/components/View";
 import PostDetails from "@/components/PostDetails";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -34,4 +35,3 @@ export default async function Page({ params }: { params: { id: string } }) {
         </>
     );
 }
-
