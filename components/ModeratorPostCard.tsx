@@ -6,9 +6,12 @@ import { EyeIcon, X, Check } from "lucide-react";
 import { formatDate } from "@/lib/utils"; 
 import ReportNumber from "./ReportNumber";
 import { Post } from "@/types/post";
+import { useState } from "react";
+import { toast } from "sonner";
 
 export default function ModeratorPostCard({ post, onPostUpdate }: { post: Post, onPostUpdate: (postId: string) => void }) {
-  console.log("Post received in PostCard: " , post);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isKeepModalOpen, setIsKeepModalOpen] = useState(false);
 
   const handleDelete = async () => {
     try {
@@ -21,10 +24,13 @@ export default function ModeratorPostCard({ post, onPostUpdate }: { post: Post, 
         throw new Error("Failed to delete item");
       }
 
-      console.log("Item deleted successfully");
+      toast.success("Post deleted successfully");
       onPostUpdate(post._id);
     } catch (error) {
       console.error("Error deleting item:", error);
+      toast.error("Failed to delete post");
+    } finally {
+      setIsDeleteModalOpen(false);
     }
   };
 
@@ -39,12 +45,16 @@ export default function ModeratorPostCard({ post, onPostUpdate }: { post: Post, 
         throw new Error("Failed to update item");
       }
 
-      console.log("Item updated successfully");
+      toast.success("Post kept successfully");
       onPostUpdate(post._id);
     } catch (error) {
       console.error("Error updating item:", error);
+      toast.error("Failed to keep post");
+    } finally {
+      setIsKeepModalOpen(false);
     }
   };
+
   return (
     <li className="startup-card group">
       <div className="flex-between">
@@ -89,18 +99,58 @@ export default function ModeratorPostCard({ post, onPostUpdate }: { post: Post, 
           <button className="startup-card_btn">Details</button>
         </Link>
       </div>
-      <div className="flex-between mt-5">
-        <div className="flex gap-2 mt-5">
-          <a href="#">
-            <button onClick={handleDelete} className="startup-card_btn-moderator_remove "><X/></button>
-          </a>
-          <a href="#">
-            <button onClick={handleKeep} className="startup-card_btn-moderator_keep"><Check/></button>
-          </a>
-        </div>
-        <ReportNumber reportCount={post.reportCount} />
-      </div>
       
+      <div className="flex gap-2 mt-5">
+        <button onClick={() => setIsDeleteModalOpen(true)} className="startup-card_btn-moderator_remove">
+          <X/>
+        </button>
+        <button onClick={() => setIsKeepModalOpen(true)} className="startup-card_btn-moderator_keep">
+          <Check/>
+        </button>
+      </div>
+      <ReportNumber reportCount={post.reportCount} />
+
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-5 rounded-lg shadow-lg w-[400px] relative">
+            <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={() => setIsDeleteModalOpen(false)}>
+              <X size={24} />
+            </button>
+            <h2 className="text-xl font-semibold mb-4">Delete Post</h2>
+            <p>Are you sure you want to delete this post?</p>
+            <div className="flex justify-end gap-3 mt-4">
+              <button className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setIsDeleteModalOpen(false)}>
+                Cancel
+              </button>
+              <button className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700" onClick={handleDelete}>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Keep Confirmation Modal */}
+      {isKeepModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-5 rounded-lg shadow-lg w-[400px] relative">
+            <button className="absolute top-2 right-2 text-gray-500 hover:text-gray-700" onClick={() => setIsKeepModalOpen(false)}>
+              <X size={24} />
+            </button>
+            <h2 className="text-xl font-semibold mb-4">Keep Post</h2>
+            <p>Are you sure you want to keep this post?</p>
+            <div className="flex justify-end gap-3 mt-4">
+              <button className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400" onClick={() => setIsKeepModalOpen(false)}>
+                Cancel
+              </button>
+              <button className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700" onClick={handleKeep}>
+                Keep
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </li>
   );
 }

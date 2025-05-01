@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { Send } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { isValidGitHubUrl } from "@/utils/validation";
 
 const StartupForm = () => {
   const [formData, setFormData] = useState({
@@ -35,6 +36,11 @@ const StartupForm = () => {
     Object.entries(formData).forEach(([key, value]) => {
       if (!value.trim()) errors[key] = `${key} is required`;
     });
+
+    // Add GitHub URL validation
+    if (formData.githubRepo && !isValidGitHubUrl(formData.githubRepo)) {
+      errors.githubRepo = "Please enter a valid GitHub repository URL (e.g., https://github.com/username/repo)";
+    }
   
     if (Object.keys(errors).length > 0) {
       setError(errors);

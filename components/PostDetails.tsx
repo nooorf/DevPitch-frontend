@@ -45,7 +45,8 @@ export default function PostDetails({ post }: { post: Post }) {
             const data = await res.json();
             if (!res.ok) throw new Error(data.message || "Failed to report post");
 
-            alert("Post has been reported successfully!");
+            toast.success("Post has been reported successfully!");
+            setIsModalOpen(false);
         } catch (error: any) {
             alert(error.message);
         } finally {

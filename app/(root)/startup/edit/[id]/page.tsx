@@ -1,28 +1,24 @@
-"use client"
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import EditForm from '@/components/EditForm'
-import { useRouter } from 'next/navigation'
+import { Post } from '@/types/post'
 
-export default function Page({ params }: { params: { id: string } }) {
-  const router = useRouter()
-  const [post, setPost] = useState<Post | null>(null)
+async function getPost(id: string): Promise<Post | null> {
+  try {
+    const res = await fetch(`http://localhost:5000/posts/${id}`, { cache: "no-store" });
+    if (!res.ok) throw new Error("Failed to fetch post");
+    return res.json();
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    return null;
+  }
+}
 
-  useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const res = await fetch(`http://localhost:5000/posts/${params.id}`, { cache: "no-store" });
-        if (!res.ok) throw new Error("Failed to fetch post");
-        const postData = await res.json();
-        console.log("This is post", postData);
-        setPost(postData);
-      } catch (error) {
-        console.error("Error fetching post:", error);
-      }
-    };
-  
-    fetchPost();
-  }, [params.id, router]);
-  
+export default async function Page({ params }: { params: { id: string } }) {
+  const post = await getPost(params.id);
+
+  if (!post) {
+    return <div>Post not found</div>;
+  }
 
   return (
     <>

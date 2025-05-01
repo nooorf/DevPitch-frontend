@@ -6,40 +6,25 @@ import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { Send } from "lucide-react";
 import { toast } from "sonner";
-import { useRouter, useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { isValidGitHubUrl } from "@/utils/validation";
+import { Post } from "@/types/post";
 
-interface Post {
-  _id: string;
-  title: string;
-  description: string;
-  category: string;
-  image: string;
-  pitch: string;
-  githubRepo: string;
+interface EditFormProps {
+  post: Post | null;
 }
 
-export default function EditForm() {
-  const [formData, setFormData] = useState<Post | null>(null);
+export default function EditForm({ post }: EditFormProps) {
+  const [formData, setFormData] = useState<Post | null>(post);
   const [error, setError] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const params = useParams();
 
   useEffect(() => {
-    if (params?.id) {
-      fetchPost();
-    }
-  }, [params]);
-
-  const fetchPost = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/posts/${params.id}`);
-      const post = await response.json();
+    if (post) {
       setFormData(post);
-    } catch (error) {
-      console.error("Failed to fetch post:", error);
     }
-  };
+  }, [post]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (formData) {
@@ -63,6 +48,10 @@ export default function EditForm() {
         errors[field] = `${field} is required`;
       }
     });
+
+    if (formData.githubRepo && !isValidGitHubUrl(formData.githubRepo)) {
+      errors.githubRepo = "Please enter a valid GitHub repository URL (e.g., https://github.com/username/repo)";
+    }
 
     if (Object.keys(errors).length > 0) {
       setError(errors);

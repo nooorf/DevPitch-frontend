@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Image from 'next/image';
 import ModeratorDisplay from '@/components/ModeratorDisplay';
@@ -23,6 +22,7 @@ const getUser = async (id: string): Promise<Moderator | null> => {
     return null;
   }
 };
+
 export default async function Page({ params }: { params: { id: string } }) {
   const id = params.id;
   console.log("This is id in moderator page: ", id)
@@ -33,7 +33,7 @@ export default async function Page({ params }: { params: { id: string } }) {
   if (!moderator) return notFound();
   return (
     <section className="profile_container">
-      <div className="profile_card !w-56">
+      <div className="profile_card w-1/3 !bg-[#CC376B]">
         <div className="profile_title">
           <h3 className="text-20-black uppercase font-bold text-center line-clamp-1">
             {moderator.name}
@@ -47,7 +47,6 @@ export default async function Page({ params }: { params: { id: string } }) {
         />
         <p className='text-30-extrabold mt-7 text-center'>@{moderator?.githubUsername}</p>
         <p className='mt-1 text-center text-14-normal'>{moderator?.bio}</p>
-
       </div>
       <div>
         <p className="text-30-bold w-full block mb-5">Reported Posts</p>
