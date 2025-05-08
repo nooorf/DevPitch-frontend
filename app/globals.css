@@ -47,37 +47,19 @@
     @apply font-normal text-sm text-white-100/80;
   }
 
-  .bg-land {
-    background-image: url('/land2.svg') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-  }
-  
-  .bg-other {
-    background-image: url('/other.svg') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-  }
-  
   .pink_container {
-    @apply w-full min-h-[530px] flex justify-center items-center flex-col py-10 px-6;
-    @apply bg-land;
+    @apply w-full bg-primary min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;
   }
 
-  .pink_container-alt {
-    @apply pink_container;
-    @apply bg-other;
-  }
-  
-  /* navbar */
   .tag {
     @apply bg-secondary px-6 py-3 font-work-sans font-bold rounded-sm uppercase relative tag-tri;
   }
+
+  /*we will follow a set style for heading in the hero section across pages so a create utility classes that can be used later on for efficiency
+  leading property determines line height of text*/
   
   .heading {
-    @apply uppercase px-6 py-3 font-work-sans font-extrabold text-black sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
+    @apply uppercase bg-black px-6 py-3 font-work-sans font-extrabold text-white sm:text-[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5;
   }
 
   .login-heading{
@@ -90,8 +72,8 @@
 
   .section_container {
     @apply px-6 py-10 max-w-7xl mx-auto;
-    background-image: none;
   }
+
   .card_grid {
     @apply grid md:grid-cols-3 sm:grid-cols-2 gap-5;
   }
@@ -131,7 +113,7 @@
   }
 
   .view_skeleton {
-    @apply bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3 top-0;
+    @apply bg-zinc-400 h-10 w-24 rounded-lg fixed bottom-3 right-3;
   }
 
   /* navbar */
@@ -277,4 +259,3 @@
 .request-card {
   @apply bg-white border-[5px] border-black py-6 px-5 rounded-[22px] shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100 w-[100%];
 }
-

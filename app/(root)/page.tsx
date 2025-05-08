@@ -22,16 +22,12 @@ export default async function Home({ searchParams }: { searchParams: { query?: s
 
   return (
     <>
-      <section className="pink_container !items-start !justify-start !gap-0 px-20">
-        <h1 className="text-[48px] font-extrabold text-black leading-tight mb-4 text-left max-w-2xl">
+      <section className="pink_container">
+        <h1 className="heading">
           Pitch Your Startup, <br /> Connect With Tech Fellows
         </h1>
-        <p className="!text-black !font-bold text-xl mb-8 text-left max-w-xl">
-          Submit Ideas, Get noticed!
-        </p>
-        <div className="w-full max-w-xl">
-          <SearchForm query={query} />
-        </div>
+        <p className="sub-heading !max-w-3xl">Submit Ideas, Get noticed!</p>
+        <SearchForm query={query} />
       </section>
 
       <section className="section_container">
