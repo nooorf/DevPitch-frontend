@@ -9,7 +9,7 @@ type CollaborationModel = {
   _id: string;
   interest: string;
   expertise: string;
-  linkedin?: string;
+  github?: string;
   description: string;
   postId: {
     _id: string;
@@ -56,15 +56,17 @@ export default function RequestsPage() {
       className="request-card"
     >
       {activeTab === "sent" ? (
-        <h3 className="text-lg font-semibold">
-          Sent to:{" "}
-          <Link
-            href={`/startup/${request.postId._id}`}
-            className="no-underline"
-          >
-            {request.postId.title}
-          </Link>
-        </h3>
+        <>
+          <h3 className="text-lg font-semibold">
+            Sent to:{" "}
+            <Link
+              href={`/startup/${request.postId._id}`}
+              className="no-underline"
+            >
+              {request.postId.title}
+            </Link>
+          </h3>
+        </>
       ) : (
         <>
           <h3 className="text-lg font-semibold">
@@ -88,21 +90,11 @@ export default function RequestsPage() {
         <strong>Interest:</strong> {request.interest}
       </p>
       <p>
+        <strong>Github:</strong> {request.github}
+      </p>
+      <p>
         <strong>Expertise:</strong> {request.expertise}
       </p>
-      {request.linkedin && (
-        <p>
-          <strong>LinkedIn:</strong>{" "}
-          <a
-            href={request.linkedin}
-            className="text-blue-600 no-underline hover:underline"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {request.linkedin}
-          </a>
-        </p>
-      )}
       <p className="mt-2">
         <strong>Description:</strong> {request.description}
       </p>

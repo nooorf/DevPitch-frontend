@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 interface User {
   _id: string;
   name: string;
-  role: string; 
+  role: string;
+  githubId?: string;
 }
 
 export default function useAuth() {

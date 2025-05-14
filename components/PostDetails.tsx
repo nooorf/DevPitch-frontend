@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FlagIcon, X } from "lucide-react";
@@ -14,9 +14,18 @@ export default function PostDetails({ post }: { post: Post }) {
         username: '',
         interest: '',
         expertise: '',
-        linkedin: '',
+        github: `https://github.com/${post.user.githubUsername}`,
         description: '',
     });
+
+    useEffect(() => {
+        if (user?.githubId) {
+            setFormData(prev => ({
+                ...prev,
+                github: `https://github.com/${user.githubId}`
+            }));
+        }
+    }, [user]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [iscollaborateOpen, setIsCollaborateOpen] = useState(false);
@@ -179,11 +188,12 @@ export default function PostDetails({ post }: { post: Post }) {
                             />
                             <input
                                 type="url"
-                                name="linkedin"
-                                placeholder="LinkedIn Profile (optional)"
+                                name="github"
+                                placeholder="GitHub Profile"
                                 className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                value={formData.linkedin}
+                                value={formData.github}
                                 onChange={handleChange}
+                                disabled={true}
                             />
                             <textarea
                                 name="description"
