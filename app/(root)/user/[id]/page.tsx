@@ -19,8 +19,9 @@ const getUser = async (id: string): Promise<User | null> => {
         return null;
     }
 }
-const page = async ({ params }: { params: {id: string} }) => {
-    const user = await getUser(params.id);
+const page = async ({ params }: { params: Promise<{id: string}> }) => {
+    const { id } = await params;
+    const user = await getUser(id);
 
     if(!user) {return <p className='text-red-500'>User not found</p>}
   return (

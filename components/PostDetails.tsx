@@ -115,7 +115,7 @@ export default function PostDetails({ post }: { post: Post }) {
                     </div>
                 </div>
                 <h3 className="text-30-bold">Pitch Details</h3>
-                <div className="flex gap-8 items-center justify-center">
+                <div className="flex gap-8 justify-center">
                     <article className="prose max-w-2xl font-work-sans break-all flex-1">
                         {post.pitch}
                     </article>
